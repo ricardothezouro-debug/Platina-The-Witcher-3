@@ -595,42 +595,94 @@ SKIPPABLE_BY_REGION = {
 }
 
 GATES = [
+    # Os seis pontos sem volta da campanha base, mais os dois prazos de carta que
+    # não são missão principal. "fails" é o que morre exatamente ali, escrito por
+    # extenso e com o nome em inglês ao lado, porque é a razão de o guia existir.
     {
         "id": "leave_white_orchard",
         "phase": "white_orchard",
-        "title": "Antes de deixar Pomar Branco",
-        "summary": "Resolva o primeiro bloco de Gwent e confirme a Marcha da Morte.",
+        "title": "Antes da Audiência Imperial (Imperial Audience)",
+        "summary": "Terminar essa missão tira você de Pomar Branco e derruba quase todas as secundárias da região.",
         "required": [
             "task:start_death_march",
             "gwent:teacher_white_orchard",
             "gwent:buy_white_orchard",
         ],
+        "fails": [
+            "Uma Frigideira Limpinha (A Frying Pan, Spick and Span)",
+            "Desaparecido em Combate (Missing in Action)",
+            "No Leito de Morte (On Death's Bed)",
+            "Carga Preciosa (Precious Cargo)",
+            "Incendiário Perverso (Twisted Firestarter)",
+        ],
+        "safe": (
+            "Amigo Fiel (Faithful Friend) é a única secundária de Pomar Branco que "
+            "sobrevive a este corte. O contrato O Diabo do Poço (Devil by the Well) "
+            "também continua vivo: dá para voltar a Pomar Branco depois, e ele só "
+            "morre no fim da campanha, em Gelo Fino."
+        ),
+    },
+    {
+        "id": "ugly_baby_checkpoint",
+        "phase": "velen",
+        "title": "Antes de Bebê Feio (Ugly Baby)",
+        "summary": "Corte curto, mas definitivo: duas missões somem quando essa principal avança.",
+        "required": [],
+        "fails": [
+            "Seguindo o Rastro (Following the Thread)",
+            "O Último Desejo (The Last Wish), e com ela a linha romântica da Yennefer",
+        ],
+        "safe": "Feche as duas antes de levar a Uma para Kaer Morhen.",
     },
     {
         "id": "vegelbud_ball_checkpoint",
         "phase": "novigrad",
-        "title": "Antes de terminar Uma Questão de Vida ou Morte",
-        "summary": "No baile de Vegelbud, vença as três partidas opcionais de Gwent antes de seguir Triss. Resolva também as corridas da propriedade antes de entrar no baile.",
+        "title": "Antes de sair da propriedade dos Vegelbud",
+        "summary": "Três cartas de Gwent existem só aqui dentro, no torneio do baile, e não têm segunda fonte.",
         "required": [
             "gwent:matter_life_death_tournament",
             "task:vegelbud_races",
         ],
+        "fails": [
+            "Carta Dandelion (Jaskier)",
+            "Carta Milva",
+            "Carta Vampiro: Bruxa (Vampire: Bruxa)",
+        ],
+        "safe": (
+            "As três saem de vencer os oponentes do torneio durante Uma Questão de "
+            "Vida ou Morte (A Matter of Life and Death). Quando você sai da "
+            "propriedade elas desaparecem para sempre: não há loja, saque ou missão "
+            "que as devolva. Salve antes de entrar no baile. Resolva também as "
+            "corridas da propriedade nesta mesma ida."
+        ),
     },
     {
         "id": "high_stakes_checkpoint",
         "phase": "novigrad",
-        "title": "Antes de entrar em Grandes Apostas",
-        "summary": "Crie um save manual nomeado e entre somente com um baralho consistente.",
+        "title": "Antes e durante Grandes Apostas (High Stakes)",
+        "summary": "As quatro cartas de líder do torneio não têm segunda chance, e perder uma partida encerra tudo.",
         "required": [
             "gwent:playing_innkeeps",
             "gwent:big_city_players",
         ],
+        "fails": [
+            "Foltest: O Forjado em Aço, de vencer Bernard Tulle",
+            "Emhyr var Emreis: O Implacável, de vencer a Madame Sasha",
+            "Francesca Findabair: Rainha de Dol Blathanna, de vencer Finneas",
+            "Eredin: Portador da Morte, de vencer o Conde Tybalt",
+        ],
+        "safe": (
+            "Perder uma partida falha o torneio e as cartas que faltavam ficam "
+            "inalcançáveis. Salve manualmente entre cada rodada e entre com um "
+            "baralho montado, nunca com o inicial. O troféu Mestre do Gwent depende "
+            "de vencer o Tybalt no fim."
+        ),
     },
     {
         "id": "isle_of_mists_checkpoint",
         "phase": "kaer_morhen",
-        "title": "Antes de navegar para a Ilha das Brumas",
-        "summary": "Este é o principal ponto de corte. Crie um save manual permanente e feche todas as pendências abaixo.",
+        "title": "Antes de navegar para a Ilha das Brumas (The Isle of Mists)",
+        "summary": "O maior corte do jogo inteiro. Faça um save manual separado, com nome, antes de embarcar.",
         "required": [
             "task:keira_chain",
             "task:roche_ves",
@@ -647,13 +699,70 @@ GATES = [
             "gwent:following_thread_nekker",
             "gwent:final_audit",
         ],
+        "fails": [
+            "Toda a linha da Keira Metz: Um Convite de Keira Metz, Uma Torre Cheia de Ratos, Um Favor para uma Amiga, Pelo Avanço do Conhecimento e Lâmpada Mágica",
+            "O Quarto de Ciri (Ciri's Room)",
+            "A Queda da Casa Reardon (The Fall of the House of Reardon)",
+            "Fantasmas do Passado (Ghosts of the Past)",
+            "Retorno ao Pântano Retorcido (Return to Crookback Bog)",
+            "Uma Questão de Vida ou Morte (A Matter of Life and Death) e Agora ou Nunca (Now or Never)",
+            "A linha do assassinato inteira: Um Plano Mortal (A Deadly Plot), Olho por Olho (An Eye for an Eye) e Os Mais Procurados da Redânia (Redania's Most Wanted)",
+            "Um Jogo Perigoso (A Dangerous Game), a missão de Gwent do Zoltan",
+            "Cabaré (Cabaret), Pecados Carnais (Carnal Sins), Aulas de Esgrima (Fencing Lessons) e A Espada de Berengar (Berengar's Blade)",
+        ],
+        "safe": (
+            "Dois troféus morrem aqui se você embarcar cedo demais. Tripulação "
+            "Completa (Full Crew) exige os aliados já recrutados, e Assassino de "
+            "Reis (Assassin of Kings) depende da linha do assassinato inteira: sem "
+            "ela, Razão de Estado nunca chega a existir."
+        ),
+    },
+    {
+        "id": "kings_gambit_checkpoint",
+        "phase": "skellige",
+        "title": "Antes do Gambito do Rei (King's Gambit)",
+        "summary": "Começar essa missão derruba duas secundárias de Skellige na hora.",
+        "required": [],
+        "fails": [
+            "Estranho em Terra Estranha (Stranger in a Strange Land)",
+            "A Caverna dos Sonhos (The Cave of Dreams)",
+        ],
+        "safe": "Feche as duas antes de aceitar o convite do banquete em Kaer Trolde.",
+    },
+    {
+        "id": "battle_preparations_checkpoint",
+        "phase": "kaer_morhen",
+        "title": "Antes dos Preparativos de Batalha (Battle Preparations)",
+        "summary": "Último corte de Skellige. Depois daqui não se volta para resolver a ilha.",
+        "required": ["task:skellige_ruler"],
+        "fails": [
+            "O Senhor de Undvik (The Lord of Undvik)",
+            "Possessão (Possession)",
+            "Gambito do Rei (King's Gambit)",
+            "Coroação (Coronation)",
+        ],
+        "safe": (
+            "São essas quatro que decidem quem senta no trono de Skellige, e o "
+            "troféu Fazedor de Reis (Kingmaker) morre junto com elas."
+        ),
     },
     {
         "id": "blindingly_obvious_checkpoint",
         "phase": "post_kaer_morhen",
-        "title": "Antes de terminar Cegamente Óbvio",
-        "summary": "Crie um save manual. A conversa com Dijkstra pode bloquear Regicida.",
+        "title": "Antes e durante Cegamente Óbvio (Blindingly Obvious)",
+        "summary": "A última janela da campanha, e ela tem uma escolha de diálogo que vale um troféu.",
         "required": ["task:blindingly_obvious_safe"],
+        "fails": [
+            "Razão de Estado (Reason of State)",
+            "Contrato: O Diabo do Poço (Contract: Devil by the Well), lá em Pomar Branco",
+        ],
+        "safe": (
+            "No fim de Cegamente Óbvio, falando com Dijkstra e Philippa, escolha a "
+            "PRIMEIRA opção de diálogo. É ela que mantém Razão de Estado viva, e sem "
+            "essa missão não existe o troféu Assassino de Reis. Se o contrato de "
+            "Pomar Branco ainda estiver aberto, vá fazer agora: Gelo Fino (On Thin "
+            "Ice) é a última chance."
+        ),
     },
 ]
 
@@ -718,3 +827,11 @@ def item_by_key(key: str) -> dict | None:
         if item["id"] == item_id:
             return item
     return None
+
+
+def phase_title(phase_id: str) -> str:
+    """Nome legível de uma fase, para os avisos de portão."""
+    for phase in PHASES:
+        if phase["id"] == phase_id:
+            return phase.get("title") or phase_id
+    return phase_id

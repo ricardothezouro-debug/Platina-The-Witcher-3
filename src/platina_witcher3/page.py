@@ -479,9 +479,25 @@ class GuidePage(QWidget):
         body.setContentsMargins(0, 12, 0, 0)
         body.setSpacing(12)
         body.addWidget(_label(guide["title"], "SectionTitle"))
+        if guide.get("intro"):
+            body.addWidget(_label(guide["intro"], "Muted"))
         self._add_diagram(body, guide["visual"], guide["title"], 530)
-        for step in guide["steps"]:
-            body.addWidget(_label(step, "Muted"))
+        # Um passo pode ser texto puro ou um dicionario com foto do local. A foto
+        # e o que responde "onde fica", que o esquema sozinho nao resolvia.
+        for index, step in enumerate(guide["steps"], start=1):
+            if isinstance(step, dict):
+                body.addWidget(_label(f"{index}. {step['text']}", "Muted"))
+                if step.get("image"):
+                    # Sem fallback: repetir o esquema inteiro embaixo de cada
+                    # passo polui mais do que ajuda. Enquanto a foto nao chega,
+                    # o widget fica vazio e discreto.
+                    body.addWidget(
+                        self._image_widget(
+                            step["image"], step["text"][:60], 760, 430, ""
+                        )
+                    )
+            else:
+                body.addWidget(_label(step, "Muted"))
         if guide.get("map_url"):
             map_button = QPushButton("Carregar mapa do jogo com as marcações")
             map_button.setCheckable(True)
@@ -668,6 +684,14 @@ class GuidePage(QWidget):
             gate for gate in guide_data.GATES
             if guide_data.phase_index(gate["phase"]) <= current_index
         ]
+        # Um portao so avisa se avisar ANTES. Estes sao os das fases seguintes
+        # que ainda estao abertos; aparecem num bloco proprio, sem caixa de
+        # auditoria, so para o jogador saber o que vem pela frente.
+        upcoming_gates = [
+            gate for gate in guide_data.GATES
+            if guide_data.phase_index(gate["phase"]) > current_index
+            and progress.gate_key(gate["id"]) not in self._done
+        ]
         pending_gates = [
             gate for gate in relevant_gates
             if progress.gate_key(gate["id"]) not in self._done and gate["phase"] == phase_id
@@ -689,6 +713,35 @@ class GuidePage(QWidget):
             )
             for gate in pending_gates:
                 layout.addWidget(self._gate_card(gate, completed=False))
+
+        if upcoming_gates:
+            nearest = upcoming_gates[0]
+            phase_title = guide_data.phase_title(nearest["phase"])
+            toggle = QPushButton(
+                f"Vem por aí: {len(upcoming_gates)} ponto(s) sem volta, o próximo em {phase_title} ▼"
+            )
+            toggle.setCheckable(True)
+            toggle.setObjectName("HistoryToggle")
+            upcoming_box = QWidget()
+            upcoming_box.setObjectName("GuideBody")
+            upcoming_layout = QVBoxLayout(upcoming_box)
+            upcoming_layout.setContentsMargins(0, 12, 0, 0)
+            upcoming_layout.setSpacing(12)
+            for gate in upcoming_gates:
+                upcoming_layout.addWidget(self._gate_preview(gate))
+            upcoming_box.hide()
+
+            def show_upcoming(visible: bool) -> None:
+                upcoming_box.setVisible(visible)
+                toggle.setText(
+                    f"Ocultar o que vem por aí ▲"
+                    if visible
+                    else f"Vem por aí: {len(upcoming_gates)} ponto(s) sem volta, o próximo em {phase_title} ▼"
+                )
+
+            toggle.toggled.connect(show_upcoming)
+            layout.addWidget(toggle)
+            layout.addWidget(upcoming_box)
 
         if previous_gates:
             toggle = QPushButton(f"Revisar {len(previous_gates)} alerta(s) de fases anteriores ▼")
@@ -814,6 +867,29 @@ class GuidePage(QWidget):
         layout.addStretch(1)
         return scroll
 
+    def _gate_preview(self, gate: dict) -> QFrame:
+        """O portao de uma fase futura: so leitura, para planejar a ida."""
+        frame, layout = _card()
+        header = QHBoxLayout()
+        header.setSpacing(10)
+        header.addWidget(_label(gate["title"], "SectionTitle"), 1)
+        badge = _pill(guide_data.phase_title(gate["phase"]))
+        header.addWidget(badge)
+        layout.addLayout(header)
+        layout.addWidget(_label(gate["summary"], "Muted"))
+        for entry in gate.get("fails") or []:
+            line = _label(f"• {entry}", "Muted")
+            line.setStyleSheet("color:#FF8FA3")
+            layout.addWidget(line)
+        if gate.get("safe"):
+            hint = _label(gate["safe"], "Muted")
+            hint.setStyleSheet(
+                "color:#C7D0DD;background:#11161F;border-left:3px solid #37F2FF;"
+                "border-radius:8px;padding:9px 11px"
+            )
+            layout.addWidget(hint)
+        return frame
+
     def _gate_card(self, gate: dict, completed: bool = False) -> QFrame:
         frame, layout = _card()
         header = QHBoxLayout()
@@ -830,6 +906,24 @@ class GuidePage(QWidget):
         header.addWidget(status)
         layout.addLayout(header)
         layout.addWidget(_label(gate["summary"], "Muted"))
+
+        # O que morre neste ponto. Fica sempre visivel, nunca atras de um
+        # "ver detalhes": e a informacao que impede o jogador de perder a run.
+        fails = gate.get("fails") or []
+        if fails:
+            layout.addWidget(_label("O QUE SOME SE VOCÊ AVANÇAR", "Kicker"))
+            for entry in fails:
+                line = _label(f"• {entry}", "Muted")
+                line.setStyleSheet("color:#FF8FA3")
+                layout.addWidget(line)
+        if gate.get("safe"):
+            hint = _label(gate["safe"], "Muted")
+            hint.setStyleSheet(
+                "color:#C7D0DD;background:#11161F;border-left:3px solid #37F2FF;"
+                "border-radius:8px;padding:9px 11px"
+            )
+            layout.addWidget(hint)
+
         requirement_boxes = []
         for required_key in gate.get("required", []):
             item = guide_data.item_by_key(required_key)

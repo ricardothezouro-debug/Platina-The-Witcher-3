@@ -29,19 +29,73 @@ CONTRACT_STARTS = {
 
 DETAIL_GUIDES = {
     "white_orchard_power": {
-        "title": "Onde ficam os Locais de Poder",
+        "title": "Onde ficam as seis pedras de Pomar Branco",
         "visual": "white-orchard-power.svg",
         "map_url": "https://cdn.mos.cms.futurecdn.net/8anNKDBk2QJvzHLafRNdCF.jpg",
-        "source": "https://www.pcgamer.com/the-witcher-3-places-of-power-locations/",
-        "credit": "Mapa do jogo: CD Projekt Red / PC Gamer",
+        "source": "https://game8.co/games/Witcher3/archives/278569",
+        "credit": "Capturas do jogo: CD Projekt Red, via Game8",
+        "intro": (
+            "São seis pedras aqui, mas o troféu pede os CINCO Sinais ativos ao "
+            "mesmo tempo: Aard, Igni, Axii, Quen e Yrden. Duas das seis são Quen, "
+            "então uma delas é só ponto de habilidade extra. Cada bônus dura até "
+            "você usar o Sinal correspondente, então limpe os inimigos de cada "
+            "pedra ANTES de absorver, e não medite no meio do caminho."
+        ),
         "steps": [
-            "1. Aard: bosque ao norte do cemitério e do Moinho (Mill), entre pedras grandes.",
-            "2. Igni: dentro do cemitério, ao norte da placa do Moinho (Mill). Há uma aparição no local.",
-            "3. Axii: atravesse a ponte a oeste do Moinho; procure o bosque a nordeste da Serraria (Sawmill).",
-            "4. Quen: colina ao sul da Ponte Quebrada (Broken Bridge). Suba pela trilha depois de cruzar a ponte.",
-            "5. Yrden: leste da Vila Abandonada (Abandoned Village), entre árvores ao sul da estrada. Cuidado com o urso.",
-            "6. Quen extra: a leste da Ponte Cackler (Cackler Bridge). É outro ponto de habilidade, mas repete o Sinal.",
-            "Para o troféu, limpe os inimigos primeiro. Depois faça 1 → 2 → 3 → 4 → 5, absorvendo o poder em cada pedra. Evite meditar ou se distrair: os cinco bônus precisam coexistir. O segundo Quen é opcional para este troféu.",
+            {
+                "text": (
+                    "Igni, poste do Moinho (Mill). Siga direto ao norte até o "
+                    "Cemitério de Pomar Branco. A pedra está em frente à entrada do "
+                    "Tesouro Guardado. Tem uma aparição rondando."
+                ),
+                "image": "https://img.game8.co/3227495/4fafbea0f4a22d912f7271f52881aaf6.jpeg/show",
+            },
+            {
+                "text": (
+                    "Aard, poste do Moinho. Continue para o norte depois da pedra "
+                    "de Igni. Esta fica ao lado de um ninho de monstros, cercada de "
+                    "carniçais: mate-os primeiro."
+                ),
+                "image": "https://img.game8.co/3227499/a7c8f80db748e5a1222a74b61fc301c9.jpeg/show",
+            },
+            {
+                "text": (
+                    "Axii, poste do Moinho. Vá para oeste até passar a pontezinha "
+                    "de madeira e siga oeste, entrando na floresta. Cercada de lobos."
+                ),
+                "image": "https://img.game8.co/3227498/c5d28a9abaf754ae31b9dfebaaa38d0d.jpeg/show",
+            },
+            {
+                "text": (
+                    "Quen, poste da Ponte Quebrada (Broken Bridge). Vá para o sul "
+                    "da ponte, perto da borda do mapa. Esta é a Quen que entra na "
+                    "conta do troféu."
+                ),
+                "image": "https://img.game8.co/3227494/9b5bd86aea649de28565edd4da2113f6.jpeg/show",
+            },
+            {
+                "text": (
+                    "Yrden, poste da Vila Abandonada (Abandoned Village). Vá para "
+                    "leste até o Sítio Abandonado e depois direto ao sul. Tem um "
+                    "urso guardando: ele mata rápido na Marcha da Morte, use "
+                    "armadilha de Yrden e ataques rápidos pelas costas."
+                ),
+                "image": "https://img.game8.co/3227497/a4deaf0eda9d1093b696e5abc4c5a7f9.jpeg/show",
+            },
+            {
+                "text": (
+                    "Quen extra, poste da Ponte Cackler (Cackler Bridge). Bem a "
+                    "leste, passando a ponte, também cercada de carniçais. Repete o "
+                    "Sinal, então NÃO é necessária para o troféu: pegue pelo ponto "
+                    "de habilidade, quando quiser."
+                ),
+                "image": "https://img.game8.co/3227493/c0fc33d173c7794f7f5d5c82c1f19c28.jpeg/show",
+            },
+            (
+                "Ordem sugerida: Igni e Aard na mesma subida ao norte do Moinho, "
+                "depois Axii a oeste, Quen na Ponte Quebrada e Yrden por último. "
+                "Com os cinco bônus ativos ao mesmo tempo o troféu estoura sozinho."
+            ),
         ],
     },
     "skellige_nests": {

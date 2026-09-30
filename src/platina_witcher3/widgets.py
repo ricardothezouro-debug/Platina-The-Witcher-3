@@ -56,34 +56,66 @@ class ChecklistBox(QCheckBox):
 
 
 class GuideImage(QLabel):
+    """Imagem que se ajusta à largura disponível e informa a altura REAL.
+
+    A versão anterior devolvia um sizeHint fixo de 200 px, sem relação com a
+    imagem escalada: o layout reservava menos espaço do que a figura ocupava e
+    ela invadia o texto seguinte. Agora o widget implementa heightForWidth, que
+    é como o Qt pergunta "de quanta altura você precisa nesta largura".
+    """
+
     def __init__(self, max_height=260, parent=None):
         super().__init__(parent)
         self._source = QPixmap()
         self._max_height = max_height
         self.setAlignment(Qt.AlignmentFlag.AlignCenter)
-        self.setSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Preferred)
+        policy = QSizePolicy(QSizePolicy.Policy.Ignored, QSizePolicy.Policy.Preferred)
+        policy.setHeightForWidth(True)
+        self.setSizePolicy(policy)
         self.setMinimumWidth(0)
 
     def set_source(self, pixmap):
         self._source = pixmap
         self._fit()
+        self.updateGeometry()
+
+    def _scaled_size(self, width):
+        if self._source.isNull():
+            return QSize(0, 0)
+        usable = max(80, width - 16)
+        return self._source.size().scaled(
+            usable, self._max_height, Qt.AspectRatioMode.KeepAspectRatio
+        )
 
     def _fit(self):
         if not self._source.isNull():
-            width = max(80, self.width()-16)
-            scaled = self._source.scaled(width, self._max_height, Qt.AspectRatioMode.KeepAspectRatio, Qt.TransformationMode.SmoothTransformation)
-            self.setPixmap(scaled)
-            self.setMinimumHeight(scaled.height()+16)
+            target = self._scaled_size(self.width())
+            self.setPixmap(
+                self._source.scaled(
+                    target, Qt.AspectRatioMode.KeepAspectRatio,
+                    Qt.TransformationMode.SmoothTransformation,
+                )
+            )
+            self.setMinimumHeight(target.height() + 16)
 
     def resizeEvent(self, event):
         super().resizeEvent(event)
         self._fit()
 
+    def hasHeightForWidth(self):
+        return not self._source.isNull()
+
+    def heightForWidth(self, width):
+        return self._scaled_size(width).height() + 16
+
     def sizeHint(self):
-        return QSize(320, min(200, self._max_height))
+        if self._source.isNull():
+            return QSize(320, 0)
+        width = self.width() or self._source.width()
+        return QSize(self._source.width(), self._scaled_size(width).height() + 16)
 
     def minimumSizeHint(self):
-        return QSize(0, 80)
+        return QSize(0, 0 if self._source.isNull() else 80)
 
 
 class ResponsiveHero(QWidget):

@@ -68,3 +68,34 @@ do guia.
 
 Toda instrução que possa bloquear a platina deve ser conferida em pelo menos
 duas fontes e, quando possível, validada no PS5 Remastered.
+
+## Pontos sem volta e missões que auto-falham
+
+Cruzadas em três fontes independentes, porque uma delas sozinha erra. O guia só
+afirma o que apareceu em pelo menos duas.
+
+1. TheGamer, lista de quests que auto-falham e por qual principal:
+   https://www.thegamer.com/witcher-3-autofail-quests/
+2. PowerPyx, troféus altamente perdíveis (Full Crew, Assassin of Kings, Gwent
+   Master) e o aviso sobre a escolha de diálogo em Cegamente Óbvio:
+   https://www.powerpyx.com/guides/the-witcher-3-wild-hunt-trophy-guide.html
+3. Game8, Gambito do Rei e o encadeamento com Preparativos de Batalha:
+   https://game8.co/games/Witcher3/archives/280178
+
+Descartada: pixelforgeguides.com, que afirma que o Contrato: O Diabo do Poço
+expira em Gelo Fino E que a linha de Keira morre na Ilha das Brumas, mas também
+inventa prazos que as outras duas contradizem. Serviu só para levantar hipóteses.
+
+## Cartas de Gwent perdíveis
+
+4. GamingProMax, as sete cartas sem nenhuma segunda fonte (três do baile dos
+   Vegelbud e as quatro de líder de Grandes Apostas):
+   https://gamingpromax.com/witcher-3-wild-hunt-all-missable-gwent-cards/
+5. GameRant, cartas com fonte alternativa quando você perde a primeira chance:
+   https://gamerant.com/the-witcher-3-all-missable-items-gwent-cards-guide/
+
+## Locais de Poder
+
+6. Game8, as seis pedras de Pomar Branco com sinal, poste mais próximo e captura
+   do mapa do jogo em cada uma. É a origem das fotos exibidas no guia:
+   https://game8.co/games/Witcher3/archives/278569
