@@ -2,7 +2,7 @@
   "id": "witcher3-base",
   "name": "The Witcher 3: Wild Hunt, platina do jogo base",
   "description": "Guia PT-BR para uma campanha na Marcha da Morte, com portões de segurança, escolhas perdíveis, Gwent por região e as 53 conquistas do jogo base no PS5 Remastered.",
-  "repo": "ricardothezouro-debug/Guia-De-Platina-The-Witcher-3",
+  "repo": "ricardothezouro-debug/Platina-The-Witcher-3",
   "ref": "main",
   "version": "1.0.0",
   "src_subdir": "src",
