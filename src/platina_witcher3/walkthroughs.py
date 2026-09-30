@@ -29,7 +29,7 @@ CONTRACT_STARTS = {
 
 DETAIL_GUIDES = {
     "white_orchard_power": {
-        "title": "Onde ficam as seis pedras de Pomar Branco",
+        "title": "Locais de Poder: as 24 pedras do jogo base, com foto",
         "visual": "white-orchard-power.svg",
         "map_url": "https://cdn.mos.cms.futurecdn.net/8anNKDBk2QJvzHLafRNdCF.jpg",
         "source": "https://game8.co/games/Witcher3/archives/278569",
@@ -96,6 +96,87 @@ DETAIL_GUIDES = {
                 "depois Axii a oeste, Quen na Ponte Quebrada e Yrden por último. "
                 "Com os cinco bônus ativos ao mesmo tempo o troféu estoura sozinho."
             ),
+            (
+                "Fechado o troféu, as outras 18 pedras do jogo base continuam "
+                "valendo um ponto de habilidade cada. Elas não têm prazo: dá "
+                "para pegar quando passar perto."
+            ),
+            {"heading": "Velen, 6 pedras"},
+            {
+                "text": "Quen, poste Lornuk. Na base da torre perto de Lornuk, na praia. Cercada de afogadores.",
+                "image": "https://img.game8.co/3227511/86b9fde7a1d22b29c5907bd6b5b875b3.jpeg/show",
+            },
+            {
+                "text": "Yrden, poste Downwarren. No alto da montanha, logo a oeste de Downwarren.",
+                "image": "https://img.game8.co/3227518/f700b4945fccad06e0a38e82ef1e30ab.jpeg/show",
+            },
+            {
+                "text": "Igni, poste Carvalho Ancião. A sudeste dos Órfãos do Pântano Retorcido. É onde você luta contra o lobisomem na missão Colina Sussurrante.",
+                "image": "https://img.game8.co/3227514/85720ae1c29c21108458a0d8b9a5bf5e.jpeg/show",
+            },
+            {
+                "text": "Quen, poste Montanha Calva. Só dá para chegar durante a missão principal Montanha Calva, antes de começar a luta com Imlerith.",
+                "image": "https://img.game8.co/3227515/e309f66459561cc8e33caf3e8d5e5fd0.jpeg/show",
+            },
+            {
+                "text": "Aard, poste Ilha Fyke. Perto do tesouro guardado ao sul de Velen, onde você enfrenta uma gárgula no pântano.",
+                "image": "https://img.game8.co/3227512/993b11498273e165afa08b9d9e8c1512.jpeg/show",
+            },
+            {
+                "text": "Yrden, poste Ilha Fyke. Dentro de uma caverna que só abre durante Perambulando no Escuro, com a Keira Metz. A entrada fica a oeste da Ilha Fyke, perto do barco.",
+                "image": "https://img.game8.co/3227513/b3dbae7a7cb23609c0f38ec48b93a3bb.jpeg/show",
+            },
+            {"heading": "Novigrad, 2 pedras"},
+            {
+                "text": "Igni, poste Praça dos Eleitores. Na borda noroeste de Novigrad, perto do templo.",
+                "image": "https://img.game8.co/3227516/8324cda5d786512abc352c4de1b46c12.jpeg/show",
+            },
+            {
+                "text": "Axii, poste Residência Vegelbud. No alto das formações rochosas, ao norte da Residência Vegelbud.",
+                "image": "https://img.game8.co/3227510/488178e576138176b9cfac70313ed777.jpeg/show",
+            },
+            {"heading": "Skellige, 9 pedras"},
+            {
+                "text": "Quen, poste Presa de Yngvar. No pico da montanha perto da Presa de Yngvar, no canto nordeste de Skellige.",
+                "image": "https://img.game8.co/3227505/63b462364b198c89bcf46be79c0a2a2d.jpeg/show",
+            },
+            {
+                "text": "Igni, poste Cripta Ancestral. Dentro da sala da estátua encapuzada grande segurando um escudo, na Cripta Ancestral.",
+                "image": "https://img.game8.co/3227509/0392c6843bae8d8ddac81116b5e4e17a.jpeg/show",
+            },
+            {
+                "text": "Quen, poste Ponte para Kaer Trolde. Na parte baixa do castelo. Só fica disponível se você ajudar a Cerys durante o Gambito do Rei.",
+                "image": "https://img.game8.co/3227525/f9263062b8d5cae1dc4968e05f549a08.jpeg/show",
+            },
+            {
+                "text": "Igni, poste Svorlag. No topo da montanha, seguindo a trilha a partir da casa destruída, a noroeste de Svorlag.",
+                "image": "https://img.game8.co/3227504/cacadb3078d85ba72dd0c269f249a65a.jpeg/show",
+            },
+            {
+                "text": "Axii, poste Encruzilhada. Da Encruzilhada, vá a sudoeste até a praia com o barco destruído. A pedra fica cercada de água.",
+                "image": "https://img.game8.co/3227502/4758f6938c452dd0995bdad6e1b99762.jpeg/show",
+            },
+            {
+                "text": "Aard, poste Redgill. De Redgill, siga ao norte até as ruínas guardadas por um ciclope. Depois de matá-lo, suba as plataformas: a pedra está no topo, ao lado do tesouro escondido.",
+                "image": "https://img.game8.co/3227506/6e93c32984b3e7e2e3872395dc98e6e4.jpeg/show",
+            },
+            {
+                "text": "Yrden, poste Acampamento dos Druidas. Bem a oeste do Acampamento dos Druidas, a céu aberto.",
+                "image": "https://img.game8.co/3227507/a46646b36df95a64b076c9bc5b459cdc.jpeg/show",
+            },
+            {
+                "text": "Axii, poste Porto de Holmstein. Direto ao norte do Porto de Holmstein, nas montanhas nevadas.",
+                "image": "https://img.game8.co/3227508/6a081aaa8a565e2ca97a2b63c9d74541.jpeg/show",
+            },
+            {
+                "text": "Yrden, poste Harviken. Siga a trilha a oeste de Harviken, ao lado da gruta dos skelligers.",
+                "image": "https://img.game8.co/3227503/0339b5711f526c6e80bb5beb2c42f80a.jpeg/show",
+            },
+            {"heading": "Kaer Morhen, 1 pedra"},
+            {
+                "text": "Igni, poste Cabana do Lago. Perto da entrada da caverna ao norte de Kaer Morhen. Vá direto ao norte da Cabana do Lago, passando o lago com nekkers.",
+                "image": "https://img.game8.co/3227501/fd1532aaf9e02f97e41a2b6894efa4bb.jpeg/show",
+            },
         ],
     },
     "skellige_nests": {

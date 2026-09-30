@@ -99,3 +99,20 @@ inventa prazos que as outras duas contradizem. Serviu só para levantar hipótes
 6. Game8, as seis pedras de Pomar Branco com sinal, poste mais próximo e captura
    do mapa do jogo em cada uma. É a origem das fotos exibidas no guia:
    https://game8.co/games/Witcher3/archives/278569
+
+## Ninhos de monstros e bombas
+
+7. TrueTrophies e PlayStationTrophies, troféu Dedetização: são 5 ninhos em
+   Skellige (4 em Ard Skellig, 1 em An Skellig) e só três bombas funcionam,
+   Grapeshot, Samum e Estrela Dançante. Isso resolve a dúvida que o handoff
+   deixou em aberto sobre o Samum:
+   https://www.truetrophies.com/t107712/pest-control-trophy
+8. Game8, mapa interativo de Skellige, que confirma a contagem de 5 ninhos:
+   https://game8.co/games/Witcher3/archives/280910
+
+## Equipamento da Escola do Grifo
+
+9. Game8, onde comprar cada mapa de Edwin Greloff: o primeiro e o segundo com o
+   armeiro de Midcopse, em Velen; o terceiro com o armeiro da Praça do Hierarca
+   e o quarto com o Hattori, em Novigrad:
+   https://game8.co/games/Witcher3/archives/279995

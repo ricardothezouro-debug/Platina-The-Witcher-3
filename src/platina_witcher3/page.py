@@ -484,9 +484,15 @@ class GuidePage(QWidget):
         self._add_diagram(body, guide["visual"], guide["title"], 530)
         # Um passo pode ser texto puro ou um dicionario com foto do local. A foto
         # e o que responde "onde fica", que o esquema sozinho nao resolvia.
-        for index, step in enumerate(guide["steps"], start=1):
+        number = 0
+        for step in guide["steps"]:
+            if isinstance(step, dict) and step.get("heading"):
+                body.addWidget(_label(step["heading"], "Kicker"))
+                number = 0
+                continue
             if isinstance(step, dict):
-                body.addWidget(_label(f"{index}. {step['text']}", "Muted"))
+                number += 1
+                body.addWidget(_label(f"{number}. {step['text']}", "Muted"))
                 if step.get("image"):
                     # Sem fallback: repetir o esquema inteiro embaixo de cada
                     # passo polui mais do que ajuda. Enquanto a foto nao chega,
