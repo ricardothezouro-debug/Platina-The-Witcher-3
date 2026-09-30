@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="860" height="420" viewBox="0 0 860 420" role="img" aria-label="Ilustração abstrata do caminho da platina">
+  <defs>
+    <linearGradient id="night" x2="1" y2="1">
+      <stop stop-color="#101829"/>
+      <stop offset="0.58" stop-color="#101424"/>
+      <stop offset="1" stop-color="#29132B"/>
+    </linearGradient>
+    <linearGradient id="horizon" x2="1">
+      <stop stop-color="#37F2FF"/>
+      <stop offset="0.5" stop-color="#7C7AFF"/>
+      <stop offset="1" stop-color="#FF4FD8"/>
+    </linearGradient>
+  </defs>
+  <rect width="860" height="420" rx="20" fill="url(#night)"/>
+  <circle cx="680" cy="106" r="116" fill="#FF4FD8" opacity="0.11"/>
+  <circle cx="680" cy="106" r="76" fill="none" stroke="#FF4FD8" stroke-width="3" opacity="0.52"/>
+  <circle cx="680" cy="106" r="58" fill="none" stroke="#37F2FF" stroke-width="2" opacity="0.55"/>
+  <path d="M0 307 108 242 187 275 316 170 440 279 533 236 647 303 760 224 860 292V420H0Z" fill="#1C2A3C"/>
+  <path d="M0 340 121 296 254 336 375 253 485 318 586 281 706 335 860 273V420H0Z" fill="#14212F" stroke="#3A5A6E" stroke-width="2"/>
+  <path d="M0 355C140 337 206 364 338 345c125-18 163-50 276-24 79 18 163 23 246-5" fill="none" stroke="url(#horizon)" stroke-width="4" opacity="0.8"/>
+  <path d="M108 358c99-12 183 4 260 0 99-4 209-45 310-34" fill="none" stroke="#37F2FF" stroke-width="2" stroke-dasharray="7 9" opacity="0.65"/>
+  <g fill="#0A101C" stroke="#37F2FF" stroke-width="3">
+    <circle cx="108" cy="358" r="8"/><circle cx="368" cy="357" r="8"/><circle cx="678" cy="324" r="8"/>
+  </g>
+  <text x="32" y="58" fill="#37F2FF" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700" letter-spacing="2">PLATINA • JOGO BASE</text>
+  <text x="32" y="112" fill="#FFFFFF" font-family="Segoe UI, sans-serif" font-size="39" font-weight="700">Seu caminho, sem pressa</text>
+  <text x="32" y="150" fill="#C3D1E2" font-family="Segoe UI, sans-serif" font-size="18">Explore livremente. Confira os riscos antes de avançar.</text>
+  <text x="32" y="395" fill="#9EB2C7" font-family="Segoe UI, sans-serif" font-size="12">ILUSTRAÇÃO DO GUIA • NÃO É UM MAPA DO JOGO</text>
+</svg>

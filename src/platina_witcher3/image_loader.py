@@ -1,0 +1,131 @@
+"""Carrega imagens por URL com cache em disco."""
+from __future__ import annotations
+
+import hashlib
+from pathlib import Path
+from typing import Callable
+from urllib import parse, request
+
+from PySide6.QtCore import QObject, QThread, Signal
+from PySide6.QtGui import QPixmap
+
+from .paths import guide_dir, urlopen
+
+
+def _cache_dir() -> Path:
+    path = guide_dir() / "img_cache"
+    path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
+def _cache_path(url: str) -> Path:
+    ext = ".img"
+    clean = url.lower().split("?")[0]
+    for candidate in (".jpg", ".jpeg", ".png", ".webp", ".gif"):
+        if clean.endswith(candidate):
+            ext = candidate
+            break
+    return _cache_dir() / (hashlib.sha1(url.encode("utf-8")).hexdigest() + ext)
+
+
+_USER_AGENT = (
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+    "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+)
+
+
+def _headers(url: str) -> dict[str, str]:
+    """Cabeçalhos de navegador.
+
+    Vários hosts de guia (o GameFAQs, por exemplo) devolvem 403 para um
+    `User-Agent` genérico sem `Referer`/`Sec-Fetch-*`. O `Referer` é a raiz do
+    próprio host da imagem, então nenhuma outra origem é revelada.
+    """
+    parts = parse.urlsplit(url)
+    return {
+        "User-Agent": _USER_AGENT,
+        "Accept": "image/avif,image/webp,image/apng,image/*,*/*;q=0.8",
+        "Accept-Language": "pt-BR,pt;q=0.9,en;q=0.8",
+        "Referer": f"{parts.scheme}://{parts.netloc}/",
+        "Sec-Fetch-Dest": "image",
+        "Sec-Fetch-Mode": "no-cors",
+        "Sec-Fetch-Site": "same-origin",
+    }
+
+
+class _DownloadWorker(QThread):
+    done = Signal(str)
+
+    def __init__(self, url: str, dest: Path) -> None:
+        super().__init__()
+        self._url = url
+        self._dest = dest
+
+    def run(self) -> None:
+        try:
+            req = request.Request(self._url, headers=_headers(self._url))
+            with urlopen(req, timeout=20) as response:
+                data = response.read()
+            self._dest.write_bytes(data)
+            self.done.emit(str(self._dest))
+        except Exception:
+            self.done.emit("")
+
+
+# Este guia tem centenas de imagens; sem um teto, abrir a aba dispararia uma
+# QThread por imagem de uma só vez — o que trava a interface e martela o host.
+_MAX_PARALELO = 6
+
+
+class ImageLoader(QObject):
+    def __init__(self, parent: QObject | None = None) -> None:
+        super().__init__(parent)
+        self._workers: list[_DownloadWorker] = []
+        self._fila: list[tuple[str, Path, Callable[[QPixmap], None]]] = []
+
+    def load(self, url: str, on_ready: Callable[[QPixmap], None]) -> QPixmap | None:
+        cache = _cache_path(url)
+        if cache.exists():
+            pixmap = QPixmap(str(cache))
+            if not pixmap.isNull():
+                return pixmap
+        self._fila.append((url, cache, on_ready))
+        self._bombear()
+        return None
+
+    def _bombear(self) -> None:
+        """Mantém no máximo _MAX_PARALELO downloads em andamento."""
+        while self._fila and len(self._workers) < _MAX_PARALELO:
+            url, cache, on_ready = self._fila.pop(0)
+            worker = _DownloadWorker(url, cache)
+
+            def _finish(path: str, worker=worker, on_ready=on_ready) -> None:
+                if worker in self._workers:
+                    self._workers.remove(worker)
+                if path:
+                    pixmap = QPixmap(path)
+                    if not pixmap.isNull():
+                        on_ready(pixmap)
+                self._bombear()
+
+            worker.done.connect(_finish)
+            self._workers.append(worker)
+            worker.start()
+
+    def shutdown(self) -> None:
+        """Encerra os downloads pendentes antes que o objeto seja destruído.
+
+        Único acréscimo ao arquivo genérico do template: sem isto, fechar o app
+        com um download em andamento destrói um QThread ainda rodando e o Qt
+        aborta o processo ("QThread: Destroyed while thread is still running").
+        """
+        self._fila.clear()
+        for worker in list(self._workers):
+            try:
+                worker.done.disconnect()
+            except (RuntimeError, TypeError):
+                pass
+            if worker.isRunning() and not worker.wait(1500):
+                worker.terminate()
+                worker.wait(1000)
+        self._workers.clear()

@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="210" viewBox="0 0 1100 210" role="img" aria-label="Rota de segurança da platina">
+  <defs>
+    <linearGradient id="line"><stop stop-color="#37F2FF"/><stop offset="1" stop-color="#FF4FD8"/></linearGradient>
+  </defs>
+  <rect width="1100" height="210" rx="15" fill="#101521" stroke="#354056"/>
+  <text x="28" y="36" fill="#37F2FF" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700">ROTA DE SEGURANÇA</text>
+  <text x="28" y="59" fill="#ACB8CA" font-family="Segoe UI, sans-serif" font-size="13">Explore Velen, Novigrad e Skellige na ordem que preferir. Feche as pendências antes da Ilha das Brumas.</text>
+  <path d="M175 125 H257 M465 125 H548 M755 125 H842" stroke="url(#line)" stroke-width="3"/>
+  <path d="M247 118 L260 125 L247 132 M538 118 L551 125 L538 132 M832 118 L845 125 L832 132" fill="none" stroke="#37F2FF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <rect x="28" y="82" width="147" height="86" rx="10" fill="#132430" stroke="#37F2FF"/>
+  <text x="45" y="112" fill="#FFFFFF" font-family="Segoe UI, sans-serif" font-size="17" font-weight="700">Começo</text>
+  <text x="45" y="138" fill="#ACB8CA" font-family="Segoe UI, sans-serif" font-size="13">Pomar + Vizima</text>
+  <rect x="260" y="82" width="205" height="86" rx="10" fill="#151A2B" stroke="#7C7AFF"/>
+  <text x="277" y="111" fill="#FFFFFF" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700">Mundo aberto</text>
+  <text x="277" y="137" fill="#ACB8CA" font-family="Segoe UI, sans-serif" font-size="13">3 regiões, ordem livre</text>
+  <rect x="551" y="82" width="204" height="86" rx="10" fill="#251729" stroke="#FF4FD8"/>
+  <text x="568" y="111" fill="#FFFFFF" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700">Auditoria</text>
+  <text x="568" y="137" fill="#ACB8CA" font-family="Segoe UI, sans-serif" font-size="13">Aliados + cartas + saves</text>
+  <rect x="845" y="82" width="227" height="86" rx="10" fill="#222018" stroke="#F3C967"/>
+  <text x="862" y="111" fill="#FFFFFF" font-family="Segoe UI, sans-serif" font-size="16" font-weight="700">Ilha das Brumas</text>
+  <text x="862" y="137" fill="#F3C967" font-family="Segoe UI, sans-serif" font-size="13">Ponto sem volta principal</text>
+  <text x="28" y="194" fill="#ACB8CA" font-family="Segoe UI, sans-serif" font-size="12">As caixas do guia registram o que você fez. Só marque uma fase quando estiver nela no jogo.</text>
+</svg>

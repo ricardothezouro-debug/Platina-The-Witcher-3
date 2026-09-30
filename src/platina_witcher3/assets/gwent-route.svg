@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="225" viewBox="0 0 1100 225" role="img" aria-label="Quatro fontes de cartas de Gwent e auditoria final">
+  <rect width="1100" height="225" rx="15" fill="#101521" stroke="#354056"/>
+  <text x="28" y="35" fill="#37F2FF" font-family="Segoe UI, sans-serif" font-size="15" font-weight="700">COMO FECHAR A COLEÇÃO DE GWENT</text>
+  <text x="28" y="59" fill="#ACB8CA" font-family="Segoe UI, sans-serif" font-size="13">Quatro fontes diferentes. Conclua todas e confira o livro dentro do jogo.</text>
+  <g font-family="Segoe UI, sans-serif" font-size="15" font-weight="700">
+    <rect x="28" y="82" width="190" height="83" rx="10" fill="#132430" stroke="#37F2FF"/>
+    <text x="44" y="112" fill="#FFFFFF">18 vendedores</text>
+    <text x="44" y="139" fill="#ACB8CA" font-size="12" font-weight="400">Compre cartas no estoque</text>
+    <rect x="233" y="82" width="190" height="83" rx="10" fill="#151A2B" stroke="#7C7AFF"/>
+    <text x="249" y="112" fill="#FFFFFF">Jogadores comuns</text>
+    <text x="249" y="139" fill="#ACB8CA" font-size="12" font-weight="400">Ganhe a carta aleatória</text>
+    <rect x="438" y="82" width="190" height="83" rx="10" fill="#251729" stroke="#FF4FD8"/>
+    <text x="454" y="112" fill="#FFFFFF">Missões únicas</text>
+    <text x="454" y="139" fill="#ACB8CA" font-size="12" font-weight="400">Confira cada recompensa</text>
+    <rect x="643" y="82" width="190" height="83" rx="10" fill="#222018" stroke="#F3C967"/>
+    <text x="659" y="112" fill="#FFFFFF">Torneios</text>
+    <text x="659" y="139" fill="#ACB8CA" font-size="12" font-weight="400">Vença antes de sair</text>
+    <rect x="848" y="82" width="224" height="83" rx="10" fill="#18271F" stroke="#B9FF43"/>
+    <text x="864" y="112" fill="#FFFFFF">Guia Milagroso</text>
+    <text x="864" y="139" fill="#B9FF43" font-size="12" font-weight="400">Tudo em zero</text>
+  </g>
+  <path d="M829 173 L850 173" stroke="#B9FF43" stroke-width="3"/>
+  <path d="M844 167 L851 173 L844 179" fill="none" stroke="#B9FF43" stroke-width="3"/>
+  <text x="28" y="199" fill="#F3C967" font-family="Segoe UI, sans-serif" font-size="12">PERDÍVEL: o baile de Vegelbud, Grandes Apostas e o corpo de Hammond merecem conferência imediata.</text>
+</svg>
