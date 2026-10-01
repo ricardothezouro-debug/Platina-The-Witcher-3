@@ -103,10 +103,14 @@ inventa prazos que as outras duas contradizem. Serviu só para levantar hipótes
 ## Ninhos de monstros e bombas
 
 7. TrueTrophies e PlayStationTrophies, troféu Dedetização: são 5 ninhos em
-   Skellige (4 em Ard Skellig, 1 em An Skellig) e só três bombas funcionam,
-   Grapeshot, Samum e Estrela Dançante. Isso resolve a dúvida que o handoff
-   deixou em aberto sobre o Samum:
+   Skellige, 4 em Ard Skellig e 1 em An Skellig:
    https://www.truetrophies.com/t107712/pest-control-trophy
+
+   CORREÇÃO sobre as bombas. Eu havia registrado aqui que Samum funcionava,
+   com base só nesta fonte. O VideoGamesBlogger lista apenas Grapeshot e
+   Estrela Dançante, então não há acordo. O guia passou a recomendar as duas
+   que aparecem em todas as fontes e a avisar para não contar com o Samum:
+   https://www.videogamesblogger.com/2015/05/19/the-witcher-3-monster-nest-locations-guide.htm
 8. Game8, mapa interativo de Skellige, que confirma a contagem de 5 ninhos:
    https://game8.co/games/Witcher3/archives/280910
 
@@ -140,3 +144,17 @@ Marcha da Morte falam de prioridades e não de distribuições fechadas.
     Complete Edition os 26 das expansões (13 de Hearts of Stone e 13 de Blood
     and Wine) aparecem na mesma lista, mas NÃO são necessários para a platina:
     https://www.powerpyx.com/guides/the-witcher-3-wild-hunt-trophy-guide.html
+
+## Cartas de Gwent com segunda chance
+
+14. Guides4Gamers, Collect 'Em All, com os resgates de Dijkstra e Tibor
+    Eggebracht descritos local a local:
+    https://guides4gamers.com/witcher-3-wild-hunt/quests/collect-em-all/
+15. Witcher Wiki (Fandom), cartas Triss Merigold e Vampiro: Katakan, incluindo
+    o prazo real do Lugos, que é zarpar nos Preparativos de Batalha e não "A
+    Pedra do Sol" como uma das fontes afirmava.
+
+Cada carta no guia leva um selo de confiança. "Confirmado" exige duas fontes
+independentes; "fonte única" e "inconsistente" são declarados como tal, e nesses
+casos o texto manda ganhar a carta na primeira chance em vez de contar com o
+resgate.

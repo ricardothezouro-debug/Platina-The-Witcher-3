@@ -1032,6 +1032,34 @@ class GuidePage(QWidget):
         for index, tip in enumerate(guide_data.GWENT_PRIMER, 1):
             notice_layout.addWidget(_label(f"{index}. {tip}", "Muted"))
         layout.addWidget(notice)
+
+        # Perdeu a primeira chance? Estas ainda têm resgate. As sete sem resgate
+        # ficam nos portões, porque lá o aviso chega antes do corte.
+        rescue, rescue_box = _card()
+        rescue_box.addWidget(_label("Perdeu a carta? Estas ainda dá para recuperar", "SectionTitle"))
+        rescue_box.addWidget(
+            _label(
+                "Sete cartas do jogo base não têm segunda chance e estão nos alertas da "
+                "aba Agora. As de baixo têm. Mesmo assim, ganhe na primeira oportunidade: "
+                "onde a fonte é única ou os relatos divergem, o resgate é sorte, não plano.",
+                "Muted",
+            )
+        )
+        for entry in gwent_catalog.GWENT_FALLBACKS:
+            head = QHBoxLayout()
+            head.setSpacing(8)
+            head.addWidget(_label(f"<b>{_esc(entry['card'])}</b>"), 1)
+            head.addWidget(self._tag(entry["confianca"]))
+            rescue_box.addLayout(head)
+            rescue_box.addWidget(_label(f"Ganhe assim: {entry['win']}", "Muted"))
+            rescue_box.addWidget(_label(f"Prazo: {entry['deadline']}", "Muted"))
+            where = _label(f"Se perdeu: {entry['fallback']}", "Muted")
+            where.setStyleSheet(
+                "color:#C7D0DD;background:#11161F;border-left:3px solid #37F2FF;"
+                "border-radius:8px;padding:8px 10px"
+            )
+            rescue_box.addWidget(where)
+        layout.addWidget(rescue)
         root_layout = layout
         picker = QComboBox()
         picker.setAccessibleName("Filtrar Gwent por região")

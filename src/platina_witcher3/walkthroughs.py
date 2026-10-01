@@ -182,24 +182,36 @@ DETAIL_GUIDES = {
     "skellige_nests": {
         "title": "Os cinco ninhos de Skellige",
         "visual": "skellige-nests.svg",
+        "intro": (
+            "Skellige é a região escolhida porque tem a menor contagem de ninhos "
+            "do jogo: cinco, sendo quatro em Ard Skellig e um em An Skellig. Isso "
+            "fecha Dedetização. Descobrir o ícone não conta: é preciso interagir "
+            "com o ninho e confirmar a explosão."
+        ),
         "steps": [
-            "1. Ard Skellig: no naufrágio a oeste/sudoeste de Encruzilhada (Crossroads), perto da praia onde Geralt desembarca.",
-            "2. Ard Skellig: siga a costa para sul/sudeste da mesma Encruzilhada. O ninho de afogadores fica ao norte/noroeste de Rannvaig.",
-            "3. Ard Skellig: na Estalagem em Ruínas (Ruined Inn), na costa leste.",
-            "4. Ard Skellig: Forte Grymmdjarr (Fort Grymmdjarr), a sudoeste de Fyresdal.",
-            "5. An Skellig: norte da Baía dos Ventos (Bay of Winds).",
-            "Leve bombas próprias para ninhos, como Samum ou Colmeia (Grapeshot). Elimine os guardas, interaja com o ninho e confirme a explosão. Descobrir o ícone não conta como destruí-lo. Estes cinco fecham Dedetização; destrua mais cinco no continente para chegar aos dez do outro troféu.",
+            "1. Ard Skellig, entre a Encruzilhada (Crossroads) e Rannvaig: dois ninhos nesse trecho de costa, guardados por afogadores e uma equidna. O primeiro fica perto do naufrágio a oeste da Encruzilhada; o segundo seguindo a costa para o sul, na direção de Rannvaig.",
+            "2. Ard Skellig, Estalagem em Ruínas (Ruined Inn): guardado por sereias e uma equidna. As fontes divergem se fica a sudeste de Fyresdal ou mais ao norte na costa leste; o ícone de ninho no mapa resolve na hora.",
+            "3. Ard Skellig, ruína a sudoeste de Fyresdal: guardado por harpias.",
+            "4. An Skellig, ao norte da Baía dos Ventos (Bay of Winds): também de harpias.",
+            "Bombas: use GRAPESHOT ou ESTRELA DANÇANTE (Dancing Star). As duas aparecem em todas as fontes consultadas. O Samum é citado por parte delas, mas não por todas, então não conte com ele: leve Grapeshot, que é barata e você fabrica cedo.",
+            "Depois dos cinco, se quiser o troféu dos dez ninhos, destrua mais cinco no continente: Velen e Novigrad têm de sobra.",
         ],
     },
     "witcher_gear_set": {
         "title": "Uma rota concreta: conjunto básico do Grifo",
         "visual": "griffin-gear.svg",
+        "intro": (
+            "O troféu pede um conjunto de bruxo COMPLETO equipado: armadura, "
+            "luvas, calças, botas e as duas espadas, todas da mesma escola e ao "
+            "mesmo tempo. Ter os diagramas não basta, e misturar escolas não vale."
+        ),
         "steps": [
-            "Compre e leia o primeiro mapa de Edwin Greloff no armeiro de Midcopse. Selecione a caça ao tesouro Escola do Grifo (Griffin School Gear) no diário para seguir os marcadores.",
-            "Hindhold: procure o andar superior da torre. Ali está o diagrama da espada de aço.",
-            "Lornruk: procure o diagrama da espada de prata no complexo do farol. A entrada submersa permite chegar ao interior quando a ponte está levantada.",
+            "Compre o Primeiro Mapa de Edwin Greloff com o ARMEIRO DE MIDCOPSE, em Velen. É ele que abre a caça ao tesouro Equipamento da Escola do Grifo no diário e põe os marcadores no mapa.",
+            "Hindhold: o diagrama da espada de aço está no andar superior da torre.",
+            "Lornruk: o diagrama da espada de prata fica no complexo do farol. Com a ponte levantada, a entrada submersa resolve.",
             "Gruta do Matador de Dragões (Dragonslayer's Grotto): explore a cripta, derrote a ekimmara e saqueie os quatro diagramas de armadura.",
-            "Leve os diagramas e materiais a um armeiro e um ferreiro com nível suficiente. Fabrique armadura, luvas, calças, botas e as duas espadas. Equipe as seis peças juntas quando alcançar o nível exigido. Ter somente os diagramas não basta.",
+            "Leve diagramas e materiais a um armeiro e a um ferreiro com nível suficiente, fabrique as seis peças e equipe todas juntas quando alcançar o nível exigido.",
+            "Se quiser subir o conjunto depois: o Segundo Mapa também é do armeiro de Midcopse; o Terceiro é do armeiro da Praça do Hierarca e o Quarto é do Hattori, os dois em Novigrad. Nada disso é necessário para o troféu, que aceita o conjunto básico.",
         ],
     },
 }

@@ -24,3 +24,91 @@ VENDORS = [
     {"id":"harviken","region":"skellige","title":"Harviken, estalajadeiro","en":"Harviken innkeeper","cards":["Ghoul","Harpy","Nekker","Vampire: Fleder"]},
     {"id":"kingfisher","region":"novigrad","title":"Estalagem do Martim-pescador, Olivier","en":"Kingfisher Inn","cards":["Havekar Healer","Havekar Smuggler","Mahakaman Defender","Vrihedd Brigade Veteran"]},
 ]
+
+
+# As cartas que TÊM segunda chance. As sete sem nenhuma estão nos portões de
+# segurança, porque ali o aviso precisa chegar antes; estas vêm aqui porque a
+# informação útil é outra: perdeu, pega onde.
+#
+# "confianca" é honestidade sobre a fonte, não enfeite. Só "confirmado" aparece
+# em duas fontes independentes. Em "fonte única" e "inconsistente" o guia manda
+# ganhar a carta na primeira chance e trata o resgate como sorte, não como plano.
+GWENT_FALLBACKS = [
+    {
+        "card": "Zoltan Chivay",
+        "win": "Vença Aldert Geert na taverna de Pomar Branco, durante Lilases e Groselhas.",
+        "deadline": "Sair de Pomar Branco",
+        "fallback": "No cadáver sob a Árvore dos Enforcados, em Velen.",
+        "confianca": "confirmado",
+    },
+    {
+        "card": "Sigismund Dijkstra",
+        "win": "Vença o Barão Sanguinário, no Poleiro do Corvo.",
+        "deadline": "Começar Retorno ao Pântano Retorcido",
+        "fallback": "No escritório dele, no Poleiro do Corvo.",
+        "confianca": "confirmado",
+    },
+    {
+        "card": "Tibor Eggebracht",
+        "win": "Vença o Olivier, estalajadeiro do Martim-Pescador, em Novigrad.",
+        "deadline": "Agora ou Nunca, missão em que o Olivier morre",
+        "fallback": "Na sala ao lado do balcão do Martim-Pescador.",
+        "confianca": "confirmado",
+    },
+    {
+        "card": "Triss Merigold",
+        "win": "Vença o Lambert, na missão Gwent: Velhos Amigos.",
+        "deadline": "A Ilha das Brumas",
+        "fallback": "Saqueando perto da cama dele, no salão principal de Kaer Morhen.",
+        "confianca": "confirmado",
+    },
+    {
+        "card": "Vampiro: Katakan",
+        "win": "Vença o Lugos, o Louco, na missão Gwent: Estilo Skellige.",
+        "deadline": "Zarpar no início dos Preparativos de Batalha, a não ser que o Svanrige vire rei",
+        "fallback": "Se você perder a janela, aparece um objetivo para saquear a carta dele.",
+        "confianca": "confirmado",
+    },
+    {
+        "card": "Fringilla Vigo, Isengrim Faoiltiarna e John Natalis",
+        "win": "Aceite a oferta do Zoltan em Um Jogo Perigoso.",
+        "deadline": "A Ilha das Brumas",
+        "fallback": "Com o Carcereiro, durante A Grande Fuga.",
+        "confianca": "fonte única",
+    },
+    {
+        "card": "Saesenthessis",
+        "win": "Vença o Vernon Roche, no esconderijo dele.",
+        "deadline": "Razão de Estado",
+        "fallback": "Nas Anotações de Roche, no esconderijo.",
+        "confianca": "fonte única",
+    },
+    {
+        "card": "Draug",
+        "win": "Vença o Crach an Craite, em Kaer Trolde.",
+        "deadline": "Gelo Fino",
+        "fallback": "Relato de que ela entra sozinha no baralho depois da missão.",
+        "confianca": "fonte única",
+    },
+    {
+        "card": "Geralt de Rívia",
+        "win": "Vença o Thaler, na Estalagem dos Sete Gatos. É a carta de unidade mais forte do jogo.",
+        "deadline": "Razão de Estado",
+        "fallback": "Há relato de saque na própria estalagem, mas inconsistente entre jogadores.",
+        "confianca": "inconsistente",
+    },
+    {
+        "card": "Esterad Thyssen",
+        "win": "Vença o Dijkstra na casa de banhos.",
+        "deadline": "Razão de Estado",
+        "fallback": "Há relato de a carta ser concedida se ele morre, mas não confirmado.",
+        "confianca": "inconsistente",
+    },
+    {
+        "card": "Foltest: O Mestre de Cerco",
+        "win": "Vença o Nobre Nilfgaardiano, no Palácio Real de Vizima.",
+        "deadline": "Nenhum: ele continua lá",
+        "fallback": "Volte ao palácio e jogue de novo quando quiser.",
+        "confianca": "confirmado",
+    },
+]
