@@ -116,3 +116,27 @@ inventa prazos que as outras duas contradizem. Serviu só para levantar hipótes
    armeiro de Midcopse, em Velen; o terceiro com o armeiro da Praça do Hierarca
    e o quarto com o Hattori, em Novigrad:
    https://game8.co/games/Witcher3/archives/279995
+
+## O que o Remastered (patch 5.0) mudou
+
+Lançado em 28/09/2026. Confirmado em três lugares, inclusive o site oficial.
+
+10. CD Projekt Red, notas oficiais em PT-BR:
+    https://www.thewitcher.com/us/pt-br/news/52043/veja-as-novidades-de-the-witcher-3-wild-hunt-remastered
+11. HackTheMinotaur, notas do patch 5.0 detalhadas:
+    https://hacktheminotaur.com/the-witcher-3/the-witcher-3-remastered-patch-notes/
+12. PushSquare, confirmando que no PS5 é ATUALIZAÇÃO da versão existente, sem
+    lista de troféus separada e sem platina nova:
+    https://www.pushsquare.com/news/2026/09/the-witcher-3-remastered-is-just-an-update-on-ps5-not-a-new-edition-with-new-trophies
+
+Ponto que ficou em aberto de propósito: as notas dizem que os valores e as
+sinergias das habilidades foram rebalanceados, mas não publicam a árvore nova
+habilidade por habilidade. Enquanto não houver dado confiável, os estilos da aba
+Marcha da Morte falam de prioridades e não de distribuições fechadas.
+
+## Escopo da platina (verificado, porque erro aqui invalidaria o guia)
+
+13. A platina "The Limits of the Possible" exige os 53 troféus do jogo base. Na
+    Complete Edition os 26 das expansões (13 de Hearts of Stone e 13 de Blood
+    and Wine) aparecem na mesma lista, mas NÃO são necessários para a platina:
+    https://www.powerpyx.com/guides/the-witcher-3-wild-hunt-trophy-guide.html

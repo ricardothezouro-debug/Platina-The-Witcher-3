@@ -1141,12 +1141,28 @@ class GuidePage(QWidget):
         warning_layout.addWidget(
             _label(
                 "Clique em Usar este estilo para salvar uma preferência. Ela aparecerá na aba Agora. "
-                "Isso não muda o jogo nem marca troféus. Você pode trocar de estilo a qualquer momento. "
-                "No Remastered, confira os pré-requisitos da árvore antes de gastar pontos.",
+                "Isso não muda o jogo nem marca troféus. Você pode trocar de estilo a qualquer momento.",
                 "Muted",
             )
         )
         layout.addWidget(warning)
+
+        # O jogador chega aqui vindo de guia escrito para a versao antiga, entao
+        # a primeira coisa da aba e o que o patch 5.0 mudou.
+        changes, changes_box = _card()
+        changes_box.addWidget(_label("O que o Remastered mudou", "SectionTitle"))
+        changes_box.addWidget(_label(guide_data.REMASTER_OPEN, "Muted"))
+        for change in guide_data.REMASTER_CHANGES:
+            changes_box.addWidget(_label(f"<b>{_esc(change['title'])}</b>"))
+            changes_box.addWidget(_label(change["detail"], "Muted"))
+            impact = _label(change["impact"], "Muted")
+            impact.setStyleSheet(
+                "color:#C7D0DD;background:#11161F;border-left:3px solid #37F2FF;"
+                "border-radius:8px;padding:8px 10px"
+            )
+            changes_box.addWidget(impact)
+        layout.addWidget(changes)
+
         for build in guide_data.BUILDS:
             selected = self._state.get("build_style") == build["id"]
             frame, box = _card("ActiveBuildPanel" if selected else "NeonPanel")

@@ -777,7 +777,7 @@ BUILDS = [
             "Quen como proteção, sem depender dele para causar dano",
             "Armadura de bruxo compatível com o peso escolhido",
         ],
-        "note": "É o estilo mais simples para a primeira campanha. Invista primeiro em sobreviver e dominar esquiva e contra-ataque. Confira os pré-requisitos da árvore Remastered antes de gastar pontos.",
+        "note": "É o estilo mais simples para a primeira campanha: invista primeiro em sobreviver e em dominar esquiva e contra-ataque. Na árvore do Remastered, suba cada habilidade até o nível que destrava a seguinte antes de abrir um ramo novo.",
     },
     {
         "id": "sign_control",
@@ -789,7 +789,7 @@ BUILDS = [
             "Igni para pressão e queimadura",
             "Ataques de espada curtos entre conjurações",
         ],
-        "note": "Ajuda em vários troféus de combate, mas deve ser desligada durante as duas lutas reservadas para O que é justo, é justo.",
+        "note": "Ajuda em vários troféus de combate, mas precisa ser DESLIGADA nas duas lutas reservadas para O que é justo, é justo: esse troféu exige matar sem Sinais, óleos, poções, bombas nem decocções.",
     },
     {
         "id": "alchemy_hybrid",
@@ -812,6 +812,75 @@ HERO_STATS = [
     {"value": "3", "label": "estilos"},
 ]
 
+
+# ── O que o Remastered (patch 5.0, 28/09/2026) mudou ──────────────────────
+# Importa para o guia porque o jogador chega aqui vindo de material escrito
+# para a versao antiga. Tudo abaixo esta nas notas oficiais do patch; o que
+# ainda nao da para afirmar com seguranca esta marcado como tal em REMASTER_OPEN.
+REMASTER_CHANGES = [
+    {
+        "title": "A árvore de habilidades foi refeita, e seus pontos foram zerados",
+        "detail": (
+            "As habilidades agora ficam numa árvore e cada uma tem TRÊS níveis. "
+            "Desbloquear uma exige ter as habilidades pré-requisito, em vez de só "
+            "acumular pontos investidos. Os valores, efeitos e sinergias foram "
+            "rebalanceados e algumas mudaram de nome. Se você tinha um save antigo, "
+            "os pontos voltaram para a sua mão para serem redistribuídos."
+        ),
+        "impact": "Qualquer build escrita antes de 28/09/2026 fala de uma árvore que não existe mais.",
+    },
+    {
+        "title": "Combate dos monstros comuns refeito",
+        "detail": (
+            "Padrões de ataque, contra-ataques, movimentação, reações e esquiva de "
+            "todos os monstros comuns foram revisados. Entrou também uma câmera "
+            "dinâmica de combate e uma troca de alvo melhor ao mover a câmera."
+        ),
+        "impact": "Na Marcha da Morte, o tempo de esquiva que você decorou em vídeo antigo pode não bater.",
+    },
+    {
+        "title": "Recuar do combate virou uma ação",
+        "detail": "Segure a esquiva e depois corra para sair de uma luta.",
+        "impact": "Saída de emergência real na Marcha da Morte, onde fugir às vezes é a jogada certa.",
+    },
+    {
+        "title": "Reforja de equipamento",
+        "detail": (
+            "Com a Yoana ou o Hattori dá para mudar a aparência de uma peça sem "
+            "mexer nos atributos dela."
+        ),
+        "impact": "Puramente cosmético, não interfere em troféu.",
+    },
+    {
+        "title": "Coleta montado e meditação sem tela",
+        "detail": (
+            "Dá para recolher itens sem desmontar do Carpeado, e a meditação passa "
+            "o tempo na tela do jogo em vez de abrir uma interface."
+        ),
+        "impact": "Economiza tempo nas voltas de coleta, que são boa parte desta platina.",
+    },
+    {
+        "title": "O que NÃO mudou: a lista de troféus",
+        "detail": (
+            "O Remastered é uma atualização gratuita da versão que você já tem, não "
+            "um produto novo. Não existe lista de troféus separada, nem platina "
+            "nova, e os troféus que você já tinha continuam desbloqueados."
+        ),
+        "impact": "O guia vale igual para quem começou antes e para quem começa agora.",
+    },
+]
+
+# Pontos que o patch mexeu e cuja consequencia pratica ainda nao esta clara.
+# Preferimos registrar a duvida a inventar recomendacao.
+REMASTER_OPEN = (
+    "O patch saiu em 28 de setembro de 2026. As notas oficiais dizem que os "
+    "valores e as sinergias das habilidades foram rebalanceados, mas não publicam "
+    "a árvore nova habilidade por habilidade, e ainda não existe consenso da "
+    "comunidade sobre qual distribuição é a melhor. Por isso os três estilos "
+    "abaixo falam de PRIORIDADES, não de uma lista fechada de habilidades: "
+    "recomendar nomes agora seria chutar. Quando a árvore estiver mapeada, esta "
+    "aba ganha as distribuições concretas."
+)
 
 def phase_index(phase_id: str) -> int:
     for index, phase in enumerate(PHASES):
