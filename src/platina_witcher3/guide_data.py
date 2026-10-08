@@ -766,42 +766,73 @@ GATES = [
     },
 ]
 
+# As tres builds usam conjuntos de bruxo do JOGO BASE. A KeenGAMER publicou
+# cinco em 07/10/2026, ja para a arvore do patch 5.0; duas ficaram de fora
+# porque dependem de equipamento de Blood and Wine (Mantícora e Lobo Esquecido).
+# "equip" sao as 12 que a fonte manda deixar equipadas. O caminho ate elas sai
+# de skill_tree.unlock_order, e nao fica escrito a mao aqui.
 BUILDS = [
     {
         "id": "sword_survival",
-        "title": "Espadachim resistente",
-        "best_for": "Quem quer um combate direto e previsível.",
-        "priorities": [
-            "Ataques rápidos e geração de adrenalina",
-            "Redução de dano e tolerância a erros",
-            "Quen como proteção, sem depender dele para causar dano",
-            "Armadura de bruxo compatível com o peso escolhido",
+        "title": "Urso: o tanque da primeira Marcha da Morte",
+        "best_for": "Quem nunca jogou na Marcha da Morte e quer margem para errar.",
+        "set": "Conjunto da Escola do Urso (Ursine), armadura pesada. A armadura básica fica em An Skellig, entre os postes Presa de Yngvar e Trilha da Presa de Yngvar (Trail to Yngvar's Fang), e pede nível 20 para fabricar.",
+        "mutagens": "Vermelhos (ligados ao Combate).",
+        "mutation": "Mutated Skin, e depois Second Life. As mutações são de Blood and Wine: sem a expansão, ignore esta linha.",
+        "equip": [
+            "Bear School Techniques", "Strength Training", "Crushing Blow",
+            "Sunder Armor", "Razor Focus", "Resolve", "Undying", "Active Shield",
+            "Refreshment", "Sun and Stars", "Counterattack", "Synergy",
         ],
-        "note": "É o estilo mais simples para a primeira campanha: invista primeiro em sobreviver e em dominar esquiva e contra-ataque. Na árvore do Remastered, suba cada habilidade até o nível que destrava a seguinte antes de abrir um ramo novo.",
+        "priorities": [
+            "Junte três pontos de adrenalina cedo e não gaste em Rend nem Whirl.",
+            "Lute protegido pelo Active Shield (o Quen que você mantém ligado).",
+            "Deixe o Sunder Armor acumular antes de abrir uma sequência longa de golpes.",
+        ],
+        "note": "As duas fontes que avaliam builds para a Marcha da Morte apontam o Urso como a escolha mais segura para a primeira campanha. Ele não torna Geralt invencível: você ainda precisa ler o ataque do inimigo.",
+        "confidence": "confirmado",
     },
     {
         "id": "sign_control",
-        "title": "Sinais e controle",
-        "best_for": "Quem prefere controlar grupos e criar janelas seguras.",
-        "priorities": [
-            "Recuperação de vigor",
-            "Aard e Yrden para controle",
-            "Igni para pressão e queimadura",
-            "Ataques de espada curtos entre conjurações",
+        "title": "Grifo: Sinais com Igni e Yrden",
+        "best_for": "Quem prefere controlar grupos e lutar de longe.",
+        "set": "Conjunto da Escola do Grifo (Griffin), armadura média. É o mesmo do troféu de conjunto completo: o passo a passo está na aba Troféus.",
+        "mutagens": "Azuis (ligados aos Sinais).",
+        "mutation": "Magic Sensibilities. É de Blood and Wine: sem a expansão, ignore esta linha.",
+        "equip": [
+            "Griffin School Techniques", "Melt Armor", "Firestream",
+            "Sustained Glyphs", "Magic Trap", "Active Shield",
+            "Supercharged Glyphs", "Catalyst", "Focus", "Chain Reaction",
+            "Adrenaline Burst", "Synergy",
         ],
-        "note": "Ajuda em vários troféus de combate, mas precisa ser DESLIGADA nas duas lutas reservadas para O que é justo, é justo: esse troféu exige matar sem Sinais, óleos, poções, bombas nem decocções.",
+        "priorities": [
+            "Quen é a âncora da defesa: nunca entre numa luta sem ele.",
+            "Especialize em um ou dois Sinais de ataque ou controle, não em todos.",
+            "Carregue dano de espada confiável para quando o vigor acabar.",
+        ],
+        "note": "Precisa ser DESLIGADA nas duas lutas de O que é justo, é justo: esse troféu exige matar sem Sinais, óleos, poções, bombas nem decocções. Tire também os mutagênicos.",
+        "confidence": "fonte única",
     },
     {
-        "id": "alchemy_hybrid",
-        "title": "Alquimia híbrida",
-        "best_for": "Quem gosta de preparação, óleos e alta eficiência contra monstros.",
-        "priorities": [
-            "Toxicidade segura",
-            "Poções e decocções adequadas ao alvo",
-            "Bombas para controle e ninhos",
-            "Dano de espada apoiado por preparação",
+        "id": "feline_fast",
+        "title": "Gato: ataques rápidos e crítico",
+        "best_for": "Quem gosta de combate agressivo e de esquivar muito.",
+        "set": "Conjunto da Escola do Gato (Feline), armadura leve, nível 17. A armadura básica fica numa caverna sob a Ilha do Templo (Temple Isle), em Novigrad, escondida por uma ilusão: você precisa do Olho de Nehaleni, que ganha em Perambulando no Escuro, com a Keira.",
+        "mutagens": "Vermelhos (ligados ao Combate).",
+        "mutation": "Bloodbath. É de Blood and Wine: sem a expansão, ignore esta linha.",
+        "equip": [
+            "Cat School Techniques", "Muscle Memory", "Three Strikes",
+            "Razor Focus", "Resolve", "Undying", "Fleet-Footed",
+            "Counterattack", "Battle Frenzy", "Exploding Shield", "Frenzy",
+            "Synergy",
         ],
-        "note": "É forte em contratos e combina com a fantasia de bruxo. Remova mutagênicos, óleos e consumíveis nas duas lutas de O que é justo, é justo.",
+        "priorities": [
+            "Sequências curtas e repetíveis: bata duas ou três vezes e saia.",
+            "Armadura leve não segura erro: use Quen ou óleo quando apertar.",
+            "Não se comprometa com uma sequência longa contra inimigo que ainda não leu.",
+        ],
+        "note": "É o estilo que mais pune erro na Marcha da Morte. Se for a sua primeira campanha nessa dificuldade, comece no Urso e troque depois: os pontos se redistribuem com a Poção da Purificação (Potion of Clearance).",
+        "confidence": "fonte única",
     },
 ]
 
@@ -873,13 +904,13 @@ REMASTER_CHANGES = [
 # Pontos que o patch mexeu e cuja consequencia pratica ainda nao esta clara.
 # Preferimos registrar a duvida a inventar recomendacao.
 REMASTER_OPEN = (
-    "O patch saiu em 28 de setembro de 2026. As notas oficiais dizem que os "
-    "valores e as sinergias das habilidades foram rebalanceados, mas não publicam "
-    "a árvore nova habilidade por habilidade, e ainda não existe consenso da "
-    "comunidade sobre qual distribuição é a melhor. Por isso os três estilos "
-    "abaixo falam de PRIORIDADES, não de uma lista fechada de habilidades: "
-    "recomendar nomes agora seria chutar. Quando a árvore estiver mapeada, esta "
-    "aba ganha as distribuições concretas."
+    "A árvore nova já está mapeada: a Game8 publicou as 80 habilidades com as "
+    "ligações de cada uma em 06/10/2026, e as builds abaixo foram refeitas para "
+    "ela. Duas coisas ainda não estão publicadas em lugar nenhum: os números de "
+    "cada nível (confira na descrição da própria habilidade, no jogo) e se uma "
+    "habilidade pede TODAS as ligações ou só uma. Por isso o caminho de cada "
+    "build abaixo é o do pior caso: ele funciona nos dois jeitos, e se o jogo "
+    "liberar algo antes, pule o que faltar."
 )
 
 def phase_index(phase_id: str) -> int:

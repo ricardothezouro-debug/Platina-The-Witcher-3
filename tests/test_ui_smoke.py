@@ -35,6 +35,14 @@ def test_page_builds_and_gate_unlocks(monkeypatch):
 
     widget = page.GuidePage()
     assert len(widget._phase_combos) >= 2
+    # Regioes nao repete os cards de Agora: objetivo de outra fase nao tem
+    # caixa de marcar ate a fase dele chegar.
+    assert not widget._boxes["task:simulate_letho"]
+    status_labels = [
+        label for label in widget.stack.widget(1).findChildren(page.QLabel)
+        if label.text() in {"FEITO", "PENDENTE"}
+    ]
+    assert len(status_labels) == len(page.guide_data.TASKS)
     widget._advance_phase()
     assert widget._state["current_phase"] == "vizima"
     assert widget._boxes["task:simulate_letho"]
@@ -59,6 +67,15 @@ def test_page_builds_and_gate_unlocks(monkeypatch):
     app.processEvents()
     app.sendPostedEvents()
     assert "gate:leave_white_orchard" not in widget._done
+    # A marcacao feita em Agora aparece no resumo de Regioes
+    assert "task:start_death_march" in widget._done
+    assert any(
+        label.text() == "FEITO"
+        for label in widget.stack.widget(1).findChildren(page.QLabel)
+    )
+    widget._open_phase("skellige")
+    assert widget._state["current_phase"] == "skellige"
+    assert widget.stack.currentIndex() == 0
     widget._choose_build(page.guide_data.BUILDS[1])
     assert widget._state["build_style"] == "sign_control"
     assert widget.stack.widget(0).findChildren(page.QLabel)

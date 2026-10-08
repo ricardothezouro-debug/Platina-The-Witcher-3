@@ -101,7 +101,7 @@ DETAIL_GUIDES = {
                 "valendo um ponto de habilidade cada. Elas não têm prazo: dá "
                 "para pegar quando passar perto."
             ),
-            {"heading": "Velen, 6 pedras"},
+            {"heading": "Velen, 6 pedras", "region": "velen"},
             {
                 "text": "Quen, poste Lornuk. Na base da torre perto de Lornuk, na praia. Cercada de afogadores.",
                 "image": "https://img.game8.co/3227511/86b9fde7a1d22b29c5907bd6b5b875b3.jpeg/show",
@@ -126,7 +126,7 @@ DETAIL_GUIDES = {
                 "text": "Yrden, poste Ilha Fyke. Dentro de uma caverna que só abre durante Perambulando no Escuro, com a Keira Metz. A entrada fica a oeste da Ilha Fyke, perto do barco.",
                 "image": "https://img.game8.co/3227513/b3dbae7a7cb23609c0f38ec48b93a3bb.jpeg/show",
             },
-            {"heading": "Novigrad, 2 pedras"},
+            {"heading": "Novigrad, 2 pedras", "region": "novigrad"},
             {
                 "text": "Igni, poste Praça dos Eleitores. Na borda noroeste de Novigrad, perto do templo.",
                 "image": "https://img.game8.co/3227516/8324cda5d786512abc352c4de1b46c12.jpeg/show",
@@ -135,7 +135,7 @@ DETAIL_GUIDES = {
                 "text": "Axii, poste Residência Vegelbud. No alto das formações rochosas, ao norte da Residência Vegelbud.",
                 "image": "https://img.game8.co/3227510/488178e576138176b9cfac70313ed777.jpeg/show",
             },
-            {"heading": "Skellige, 9 pedras"},
+            {"heading": "Skellige, 9 pedras", "region": "skellige"},
             {
                 "text": "Quen, poste Presa de Yngvar. No pico da montanha perto da Presa de Yngvar, no canto nordeste de Skellige.",
                 "image": "https://img.game8.co/3227505/63b462364b198c89bcf46be79c0a2a2d.jpeg/show",
@@ -172,7 +172,7 @@ DETAIL_GUIDES = {
                 "text": "Yrden, poste Harviken. Siga a trilha a oeste de Harviken, ao lado da gruta dos skelligers.",
                 "image": "https://img.game8.co/3227503/0339b5711f526c6e80bb5beb2c42f80a.jpeg/show",
             },
-            {"heading": "Kaer Morhen, 1 pedra"},
+            {"heading": "Kaer Morhen, 1 pedra", "region": "kaer_morhen"},
             {
                 "text": "Igni, poste Cabana do Lago. Perto da entrada da caverna ao norte de Kaer Morhen. Vá direto ao norte da Cabana do Lago, passando o lago com nekkers.",
                 "image": "https://img.game8.co/3227501/fd1532aaf9e02f97e41a2b6894efa4bb.jpeg/show",
@@ -215,3 +215,21 @@ DETAIL_GUIDES = {
         ],
     },
 }
+
+
+def power_stones_by_region() -> dict[str, list[dict]]:
+    """As pedras com foto, agrupadas por regiao, para o atlas da aba Regioes.
+
+    As de Pomar Branco vem antes do primeiro cabecalho; cada cabecalho seguinte
+    diz a regiao das pedras que vem depois dele.
+    """
+    stones: dict[str, list[dict]] = {}
+    region = "white_orchard"
+    for step in DETAIL_GUIDES["white_orchard_power"]["steps"]:
+        if not isinstance(step, dict):
+            continue
+        if step.get("heading"):
+            region = step["region"]
+            continue
+        stones.setdefault(region, []).append(step)
+    return stones

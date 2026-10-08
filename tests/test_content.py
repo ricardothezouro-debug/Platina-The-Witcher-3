@@ -87,3 +87,41 @@ def test_spoiler_copy_does_not_use_em_dashes():
                 elif isinstance(value, list):
                     user_facing.extend(value)
     assert all("—" not in text and "–" not in text for text in user_facing)
+
+
+def test_skill_tree_links_point_to_real_skills_without_cycles():
+    from platina_witcher3 import skill_tree
+
+    assert len(skill_tree.SKILLS) == 80
+    for name, (tree, links) in skill_tree.SKILLS.items():
+        assert tree in skill_tree.TREE_ORDER
+        for link in links:
+            assert link in skill_tree.SKILLS, f"{name} -> {link}"
+    # unlock_order de tudo terminaria em recursao infinita se houvesse ciclo
+    everything = skill_tree.unlock_order(list(skill_tree.SKILLS))
+    assert sorted(everything) == sorted(skill_tree.SKILLS)
+
+
+def test_builds_equip_twelve_real_skills_and_path_respects_links():
+    from platina_witcher3 import skill_tree
+
+    for build in guide_data.BUILDS:
+        assert len(build["equip"]) == 12, build["id"]
+        assert len(set(build["equip"])) == 12, build["id"]
+        assert build["confidence"] in {"confirmado", "fonte única", "inconsistente"}
+        path = skill_tree.unlock_order(build["equip"])
+        assert set(build["equip"]) <= set(path)
+        position = {name: index for index, name in enumerate(path)}
+        for name in path:
+            for link in skill_tree.links_of(name):
+                assert position[link] < position[name], f"{build['id']}: {link} antes de {name}"
+
+
+def test_power_stones_split_by_region_add_up_to_24():
+    from platina_witcher3.walkthroughs import power_stones_by_region
+
+    stones = power_stones_by_region()
+    assert {region: len(items) for region, items in stones.items()} == {
+        "white_orchard": 6, "velen": 6, "novigrad": 2, "skellige": 9, "kaer_morhen": 1,
+    }
+    assert all(stone.get("image") for items in stones.values() for stone in items)
