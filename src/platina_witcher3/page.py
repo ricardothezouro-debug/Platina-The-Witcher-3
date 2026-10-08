@@ -26,14 +26,14 @@ from PySide6.QtWidgets import (
     QWidget,
 )
 
-from . import guide_data, gwent_catalog, progress, trophies
+from . import guide_data, gwent_catalog, progress, skill_tree, trophies
 from .image_loader import ImageLoader
 from .paths import guide_dir_label
 from .storage import load_progress, load_ui, save_progress, save_ui
 from .topbar import InfoCorner, TopBar
 from .widgets import ChecklistBox, GuideImage, ResponsiveHero, FuturePanel
 from .theme import GUIDE_STYLE
-from .walkthroughs import DETAIL_GUIDES, CONTRACT_STARTS
+from .walkthroughs import CONTRACT_STARTS, DETAIL_GUIDES, power_stones_by_region
 
 _TIER_COLORS = {
     "bronze": "#CD7F32",
@@ -50,6 +50,9 @@ _TAG_COLORS = {
     "exploração": "#7FE7FF",
     "pode ignorar": "#A8B0BC",
     "selecionado": "#B9FF43",
+    "confirmado": "#B9FF43",
+    "fonte única": "#C7A34B",
+    "inconsistente": "#F87171",
 }
 _PROGRESS_QSS = (
     "QProgressBar{background:#0B111A;border:1px solid #273140;border-radius:9px;"
@@ -348,6 +351,11 @@ class GuidePage(QWidget):
                     self._done.discard(gate_key)
                     self._sync_boxes(gate_key, False)
                 affects_gate = True
+        self._run_refreshers()
+        self._save_state()
+        self._update_progress()
+
+    def _run_refreshers(self) -> None:
         live_refreshers = []
         for refresh in self._gate_refreshers:
             try:
@@ -356,8 +364,6 @@ class GuidePage(QWidget):
             except RuntimeError:
                 continue
         self._gate_refreshers = live_refreshers
-        self._save_state()
-        self._update_progress()
         if affects_gate:
             QTimer.singleShot(0, self._replace_now_page)
 
@@ -376,6 +382,7 @@ class GuidePage(QWidget):
         self._done.clear()
         for key in keys:
             self._sync_boxes(key, False)
+        self._run_refreshers()
         self._save_state()
         self._update_progress()
         self._replace_now_page()
@@ -780,7 +787,7 @@ class GuidePage(QWidget):
         layout.addWidget(
             self._section_header(
                 "02" if pending_gates else "01", "Nesta fase",
-                "Marque o que já fez. Estes itens também aparecem nas abas Regiões e Gwent.",
+                "Marque o que já fez. É aqui que os objetivos são marcados; a aba Regiões só mostra o que existe em cada lugar.",
             )
         )
         if current_tasks or current_gwent or current_vendors:
@@ -825,7 +832,7 @@ class GuidePage(QWidget):
                 _label(f"ESTILO ATIVO · {selected_build['title']}", "Kicker")
             )
             build_layout.addWidget(
-                _label("Prioridade: " + selected_build["priorities"][0] + ".", "Muted")
+                _label("Na Marcha da Morte: " + selected_build["priorities"][0], "Muted")
             )
             layout.addWidget(build_card)
 
@@ -954,24 +961,127 @@ class GuidePage(QWidget):
         layout.addWidget(audit)
         return frame
 
+    def _open_phase(self, phase_id: str) -> None:
+        """Leva da aba Regioes para a fase certa da aba Agora."""
+        self._phase_changed(phase_id)
+        self._select_section(0)
+
+    def _region_tasks_card(self, tasks: list[dict]) -> QFrame:
+        """Os objetivos da regiao, so para leitura. Quem marca e a aba Agora.
+
+        Antes o mesmo card aparecia nas duas abas e parecia repeticao. Aqui fica
+        uma linha por objetivo, com o estado e o atalho para a fase dele.
+        """
+        frame, layout = _card()
+        layout.addWidget(_label(f"Objetivos desta região ({len(tasks)})", "SectionTitle"))
+        layout.addWidget(
+            _label(
+                "Você marca cada um na aba Agora, na fase em que ele acontece. "
+                "O botão leva direto para lá.",
+                "Muted",
+            )
+        )
+        for task in tasks:
+            row = QHBoxLayout()
+            row.setSpacing(10)
+            status = QLabel()
+            status.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
+            row.addWidget(status)
+            row.addWidget(_label(_bilingual_title(task)), 1)
+            jump = QPushButton(f"Abrir em Agora: {guide_data.phase_title(task['phase'])}")
+            jump.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
+            jump.clicked.connect(
+                lambda _checked=False, phase=task["phase"]: self._open_phase(phase)
+            )
+            row.addWidget(jump)
+            layout.addLayout(row)
+            key = progress.task_key(task["id"])
+
+            def refresh(label: QLabel = status, item_key: str = key) -> None:
+                done = item_key in self._done
+                color = "#B9FF43" if done else "#C7A34B"
+                label.setText("FEITO" if done else "PENDENTE")
+                label.setStyleSheet(
+                    f"color:{color};background:#0A0B12;border:1px solid {color};"
+                    "border-radius:7px;padding:3px 7px;font-size:10px;font-weight:700"
+                )
+
+            refresh()
+            # A mesma lista que os portoes usam: roda a cada marcacao, em
+            # qualquer aba, e descarta sozinha os rotulos que ja morreram.
+            self._gate_refreshers.append(refresh)
+        return frame
+
+    def _region_power_card(self, stones: list[dict]) -> QFrame:
+        """Os Locais de Poder da regiao, com foto, carregados so ao abrir."""
+        frame, layout = _card()
+        toggle = QPushButton(f"Locais de Poder nesta região ({len(stones)}) ▼")
+        toggle.setCheckable(True)
+        toggle.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
+        body = QWidget()
+        body.setObjectName("GuideBody")
+        body_layout = QVBoxLayout(body)
+        body_layout.setContentsMargins(0, 8, 0, 0)
+        body_layout.setSpacing(12)
+        body.hide()
+        built = [False]
+
+        def show(visible: bool) -> None:
+            if visible and not built[0]:
+                built[0] = True
+                body_layout.addWidget(
+                    _label(
+                        "Cada pedra vale um ponto de habilidade. Limpe os inimigos em "
+                        "volta antes de absorver.",
+                        "Muted",
+                    )
+                )
+                for number, stone in enumerate(stones, 1):
+                    body_layout.addWidget(_label(f"{number}. {stone['text']}", "Muted"))
+                    body_layout.addWidget(
+                        self._image_widget(stone["image"], stone["text"][:60], 760, 430, "")
+                    )
+            body.setVisible(visible)
+            toggle.setText(
+                f"Ocultar Locais de Poder ({len(stones)}) ▲" if visible
+                else f"Locais de Poder nesta região ({len(stones)}) ▼"
+            )
+
+        toggle.toggled.connect(show)
+        layout.addWidget(toggle)
+        layout.addWidget(body)
+        return frame
+
     def _build_regions_page(self) -> QWidget:
         scroll, layout = _scroll_page()
         self._add_diagram(layout, "safety-route.svg", "Rota de segurança da platina")
+        intro, intro_layout = _card()
+        intro_layout.addWidget(_label("O que existe em cada região", "SectionTitle"))
+        intro_layout.addWidget(
+            _label(
+                "Esta aba é o mapa: contratos, Locais de Poder com foto e o que dá para "
+                "ignorar. O que fazer agora e o que não pode perder fica na aba Agora.",
+                "Muted",
+            )
+        )
+        layout.addWidget(intro)
         root_layout = layout
         picker = QComboBox()
-        picker.setAccessibleName("Filtrar objetivos por região")
+        picker.setAccessibleName("Filtrar por região")
         picker.addItem("Todas as regiões", "")
         root_layout.addWidget(picker)
         groups = []
         tasks_by_region: dict[str, list[dict]] = defaultdict(list)
         for task in guide_data.TASKS:
             tasks_by_region[task["region"]].append(task)
+        stones_by_region = power_stones_by_region()
         for region in guide_data.REGIONS:
             tasks = tasks_by_region.get(region["id"], [])
             contracts = [
                 item for item in guide_data.CONTRACTS if item["region"] == region["id"]
             ]
-            if not tasks and not contracts:
+            stones = stones_by_region.get(region["id"], [])
+            if not tasks and not contracts and not stones:
                 continue
             group = QWidget()
             group.setObjectName("GuideBody")
@@ -982,8 +1092,6 @@ class GuidePage(QWidget):
             groups.append((region["id"], group))
             picker.addItem(f"{region['title']} ({region['en']})", region["id"])
             layout.addWidget(_label(f"{region['title']} ({region['en']})", "SectionTitle"))
-            for item in tasks:
-                layout.addWidget(self._item_card(item, progress.task_key(item["id"])))
             if contracts:
                 contract_card, contract_layout = _card()
                 contract_layout.addWidget(
@@ -1008,6 +1116,10 @@ class GuidePage(QWidget):
                     )
                     contract_layout.addWidget(_label("Onde começar: " + CONTRACT_STARTS[item["id"]], "Muted"))
                 layout.addWidget(contract_card)
+            if stones:
+                layout.addWidget(self._region_power_card(stones))
+            if tasks:
+                layout.addWidget(self._region_tasks_card(tasks))
             skippable = guide_data.SKIPPABLE_BY_REGION.get(region["id"])
             if skippable:
                 layout.addWidget(self._skippable_card(skippable))
@@ -1192,25 +1304,79 @@ class GuidePage(QWidget):
         layout.addWidget(changes)
 
         for build in guide_data.BUILDS:
-            selected = self._state.get("build_style") == build["id"]
-            frame, box = _card("ActiveBuildPanel" if selected else "NeonPanel")
-            heading = QHBoxLayout()
-            heading.addWidget(_label(build["title"], "SectionTitle"), 1)
-            if selected:
-                heading.addWidget(self._tag("selecionado"))
-            box.addLayout(heading)
-            box.addWidget(_label(build["best_for"], "Muted"))
-            priorities = "<br>".join(f"• {_esc(value)}" for value in build["priorities"])
-            box.addWidget(_label(priorities))
-            box.addWidget(_label(build["note"], "Muted"))
-            button = QPushButton("Estilo ativo" if selected else "Usar este estilo")
-            button.setObjectName("PrimaryButton" if selected else "")
-            button.setEnabled(not selected)
-            button.clicked.connect(lambda _checked=False, item=build: self._choose_build(item))
-            box.addWidget(button)
-            layout.addWidget(frame)
+            layout.addWidget(self._build_card(build))
         layout.addStretch(1)
         return scroll
+
+    def _build_card(self, build: dict) -> QFrame:
+        selected = self._state.get("build_style") == build["id"]
+        frame, box = _card("ActiveBuildPanel" if selected else "NeonPanel")
+        heading = QHBoxLayout()
+        heading.setSpacing(8)
+        heading.addWidget(_label(build["title"], "SectionTitle"), 1)
+        heading.addWidget(self._tag(build["confidence"]))
+        if selected:
+            heading.addWidget(self._tag("selecionado"))
+        box.addLayout(heading)
+        box.addWidget(_label(build["best_for"], "Muted"))
+
+        box.addWidget(_label("COMO JOGAR NA MARCHA DA MORTE", "Kicker"))
+        box.addWidget(_label("<br>".join(f"• {_esc(value)}" for value in build["priorities"])))
+        box.addWidget(_label(build["note"], "Muted"))
+
+        box.addWidget(_label("EQUIPAMENTO", "Kicker"))
+        box.addWidget(_label(f"<b>Armadura:</b> {_esc(build['set'])}"))
+        box.addWidget(_label(f"<b>Mutagênicos:</b> {_esc(build['mutagens'])}"))
+        box.addWidget(_label(f"<b>Mutação:</b> {_esc(build['mutation'])}", "Muted"))
+
+        # As 12 equipadas, por arvore, com o nome que aparece na tela do jogo.
+        box.addWidget(_label("AS 12 HABILIDADES PARA DEIXAR EQUIPADAS", "Kicker"))
+        by_tree: dict[str, list[str]] = defaultdict(list)
+        for name in build["equip"]:
+            by_tree[skill_tree.tree_of(name)].append(name)
+        for tree in skill_tree.TREE_ORDER:
+            if by_tree.get(tree):
+                box.addWidget(_label(f"<b>{tree}:</b> {_esc(', '.join(by_tree[tree]))}"))
+
+        # O caminho: sai da arvore, nao de uma lista escrita a mao.
+        path = skill_tree.unlock_order(build["equip"])
+        equipped = set(build["equip"])
+        toggle = QPushButton(f"Ver a ordem de compra ({len(path)} habilidades) ▼")
+        toggle.setCheckable(True)
+        toggle.setSizePolicy(QSizePolicy.Policy.Maximum, QSizePolicy.Policy.Fixed)
+        lines = []
+        for number, name in enumerate(path, 1):
+            links = skill_tree.links_of(name)
+            suffix = f" · pede {', '.join(links)}" if links else " · livre desde o começo"
+            mark = "<b>EQUIPAR</b> " if name in equipped else ""
+            lines.append(
+                f"{number}. {mark}{_esc(name)} <span style='color:#7D8796'>"
+                f"({skill_tree.tree_of(name)}{_esc(suffix)})</span>"
+            )
+        order = _label(
+            "Pior caso, contando que o jogo peça todas as ligações. Se a tela já liberar "
+            "uma habilidade antes, pule o que faltar. Os níveis 2 e 3 custam pontos a "
+            "mais: dê prioridade às marcadas como EQUIPAR.<br><br>" + "<br>".join(lines)
+        )
+        order.hide()
+
+        def show_order(visible: bool) -> None:
+            order.setVisible(visible)
+            toggle.setText(
+                f"Ocultar a ordem de compra ▲" if visible
+                else f"Ver a ordem de compra ({len(path)} habilidades) ▼"
+            )
+
+        toggle.toggled.connect(show_order)
+        box.addWidget(toggle)
+        box.addWidget(order)
+
+        button = QPushButton("Estilo ativo" if selected else "Usar este estilo")
+        button.setObjectName("PrimaryButton" if selected else "")
+        button.setEnabled(not selected)
+        button.clicked.connect(lambda _checked=False, item=build: self._choose_build(item))
+        box.addWidget(button)
+        return frame
 
     def _choose_build(self, build: dict) -> None:
         self._state["build_style"] = build["id"]

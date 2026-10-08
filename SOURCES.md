@@ -133,10 +133,9 @@ Lançado em 28/09/2026. Confirmado em três lugares, inclusive o site oficial.
     lista de troféus separada e sem platina nova:
     https://www.pushsquare.com/news/2026/09/the-witcher-3-remastered-is-just-an-update-on-ps5-not-a-new-edition-with-new-trophies
 
-Ponto que ficou em aberto de propósito: as notas dizem que os valores e as
-sinergias das habilidades foram rebalanceados, mas não publicam a árvore nova
-habilidade por habilidade. Enquanto não houver dado confiável, os estilos da aba
-Marcha da Morte falam de prioridades e não de distribuições fechadas.
+Até 05/10/2026 a árvore nova não estava publicada habilidade por habilidade, e
+os estilos da aba Marcha da Morte falavam só de prioridades. Isso mudou: ver
+"Árvore do patch 5.0 e builds" abaixo.
 
 ## Escopo da platina (verificado, porque erro aqui invalidaria o guia)
 
@@ -158,3 +157,40 @@ Cada carta no guia leva um selo de confiança. "Confirmado" exige duas fontes
 independentes; "fonte única" e "inconsistente" são declarados como tal, e nesses
 casos o texto manda ganhar a carta na primeira chance em vez de contar com o
 resgate.
+
+## Árvore do patch 5.0 e builds
+
+16. Game8, List of All Abilities: New Remastered Skill Trees (atualizada em
+    06/10/2026): as 80 habilidades com as ligações de cada uma. É a base de
+    `skill_tree.py`:
+    https://game8.co/games/Witcher3/archives/275439
+17. Hack The Minotaur, The Witcher 3 Remastered New Skill Trees Guide: a ordem
+    por nível de cada árvore. Bate com as ligações da Game8 em Combate, Sinais e
+    Alquimia. Em Gerais diverge (põe a Escola do Urso no nível 4), mas a nota
+    oficial do patch, a Game8 e a FinalBoss dizem que as seis técnicas de escola
+    ficam livres desde o começo, então o guia segue as três:
+    https://hacktheminotaur.com/the-witcher-3/the-witcher-3-remastered-new-skill-trees-guide/
+18. KeenGAMER, The Witcher 3 Remastered: Best Builds for Every Playstyle
+    (07/10/2026, refeita para a árvore 5.0): as 12 habilidades equipadas, o
+    conjunto e a mutação de cada build. Das cinco, ficaram as três com conjunto
+    do jogo base (Urso, Grifo, Gato); Mantícora e Lobo Esquecido pedem Blood and
+    Wine:
+    https://www.keengamer.com/articles/guides/the-witcher-3-remastered-best-builds-for-every-playstyle/
+19. FinalBoss, Choose the Best Remastered Build by Playstyle (02/10/2026): sem
+    nomes de habilidade, mas com as dicas de Marcha da Morte por escola e a
+    segunda opinião de que o Urso é a escolha mais segura para a primeira
+    campanha. Por isso só a build do Urso leva "confirmado":
+    https://finalboss.io/the-witcher-3-wild-hunt-choose-the-best-remastered-build-by-playstyle
+20. Localização da armadura básica do Urso (An Skellig, Trilha da Presa de
+    Yngvar, nível 20) e da do Gato (caverna sob a Ilha do Templo, com o Olho de
+    Nehaleni), em mais de um guia; uma fonte isolada põe o conjunto do Gato
+    inteiro em Velen e foi ignorada:
+    https://www.pcgamer.com/the-witcher-3-ursine-armor-bear-school-gear
+    https://witcherhour.com/how-to-get-the-cat-feline-witcher-gear/
+
+O que segue sem fonte em lugar nenhum, e o guia diz isso na tela: os números de
+cada nível das habilidades e se uma habilidade pede TODAS as ligações ou basta
+uma. Por isso a ordem de compra de cada build é a do pior caso, gerada pela
+árvore (`unlock_order`), e não escrita à mão. Descartada: a WitcherHour diz
+estar atualizada para o Remastered, mas não cita uma única ligação da árvore
+nova e mistura builds de 2020.
